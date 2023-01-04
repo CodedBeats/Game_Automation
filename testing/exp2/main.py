@@ -23,7 +23,8 @@ locations = list(zip(*locations[::-1]))
 rectangles = []
 for l in locations:
     rect = [int(l[0]), int(l[1]), peaShooterW, peaShooterH]
-    # add rectangle to rectangles arr
+    # add rectangle to rectangles arr twice (since if there is only 1 rect at a poss it will eliminate it when grouping)
+    rectangles.append(rect)
     rectangles.append(rect)
 
 # group rectangles that are close to each other where 3rd parameter controls how close together they must be to be grouped
@@ -37,14 +38,21 @@ if len(rectangles):
     lineColor = (0, 0, 255) # (B,G,R)
     lineThickness = 2
     lineType = cv.LINE_8
+    markerColor = (255, 255, 0)
+    markerType = cv.MARKER_CROSS
 
     # loop over each location
     for (x, y, w, h) in rectangles:
         # determine rect pos
         topLeft = (x, y)
         bottomRight = (x + w, y + h)
+        # get center of rect
+        centerX = x + int(w/2)
+        centerY = y + int(h/2)
         # draw the box
         cv.rectangle(pvz, topLeft, bottomRight, lineColor, lineThickness, lineType)
+        # draw marker in middle of rect
+        cv.drawMarker(pvz, (centerX, centerY), markerColor, markerType)
 
     # draw rectangle where the is match is located
     cv.imshow("Matched Image", pvz)
