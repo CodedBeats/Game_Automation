@@ -38,8 +38,6 @@ if len(rectangles):
     lineColor = (0, 0, 255) # (B,G,R)
     lineThickness = 2
     lineType = cv.LINE_8
-    markerColor = (255, 255, 0)
-    markerType = cv.MARKER_CROSS
 
     # loop over each location
     for (x, y, w, h) in rectangles:
@@ -51,8 +49,6 @@ if len(rectangles):
         centerY = y + int(h/2)
         # draw the box
         cv.rectangle(pvz, topLeft, bottomRight, lineColor, lineThickness, lineType)
-        # draw marker in middle of rect
-        cv.drawMarker(pvz, (centerX, centerY), markerColor, markerType)
 
     # draw rectangle where the is match is located
     cv.imshow("Matched Image", pvz)
