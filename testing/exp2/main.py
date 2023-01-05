@@ -2,7 +2,7 @@ import cv2 as cv
 import numpy as np
 
 # wrap all this code in a function
-def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode, rectColor = (0, 0, 255)):
+def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode, lineColor = (0, 0, 255)):
 
     # define imgs as variables 
     baseImage = cv.imread(baseImagePath, cv.IMREAD_UNCHANGED)
@@ -42,10 +42,10 @@ def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode, rectC
     points = []
     if len(rectangles):
         # set rect properties
-        lineColor = rectColor # (B,G,R)
+        lineColor = lineColor # (B,G,R)
         lineThickness = 2
         lineType = cv.LINE_8
-        markerColor = (0, 255, 255) # (B,G,R)
+        markerColor = lineColor # (B,G,R)
         markerType = cv.MARKER_CROSS
         markerSize = 30
         markerThickness = 2
@@ -82,5 +82,5 @@ def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode, rectC
 
 
 
-# points = findImageMatches("./imgRef/PvZ.png", "./imgRef/peaShooter.png", thresholdVal = 0.7, mode = "points")
-points = findImageMatches("./imgRef/xx.png", "./imgRef/yy.png", thresholdVal = 0.3, mode = "rectangles", rectColor = (0, 255, 0))
+# points = findImageMatches("./imgRef/PvZ.png", "./imgRef/peaShooter.png", thresholdVal = 0.7, mode = "points", lineColor = (255, 255, 0))
+points = findImageMatches("./imgRef/xx.png", "./imgRef/yy.png", thresholdVal = 0.3, mode = "rectangles", lineColor = (0, 255, 0))
