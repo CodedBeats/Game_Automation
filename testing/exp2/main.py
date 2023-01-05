@@ -7,10 +7,6 @@ def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode, lineC
     # define imgs as variables 
     baseImage = cv.imread(baseImagePath, cv.IMREAD_UNCHANGED)
     isolatedImage = cv.imread(isolatedImagePath, cv.IMREAD_UNCHANGED)
-    baseImage.astype(np.float32)
-    baseImage.astype(np.uint8)
-    isolatedImage.astype(np.float32)
-    isolatedImage.astype(np.uint8)
     # save dimenshions of Pea Shooter img
     isolatedImageW = isolatedImage.shape[1]
     isolatedImageH = isolatedImage.shape[0]
