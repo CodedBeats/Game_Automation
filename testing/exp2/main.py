@@ -2,11 +2,15 @@ import cv2 as cv
 import numpy as np
 
 # wrap all this code in a function
-def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode):
+def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode, rectColor = (0, 0, 255)):
 
     # define imgs as variables 
     baseImage = cv.imread(baseImagePath, cv.IMREAD_UNCHANGED)
     isolatedImage = cv.imread(isolatedImagePath, cv.IMREAD_UNCHANGED)
+    baseImage.astype(np.float32)
+    baseImage.astype(np.uint8)
+    isolatedImage.astype(np.float32)
+    isolatedImage.astype(np.uint8)
     # save dimenshions of Pea Shooter img
     isolatedImageW = isolatedImage.shape[1]
     isolatedImageH = isolatedImage.shape[0]
@@ -38,7 +42,7 @@ def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode):
     points = []
     if len(rectangles):
         # set rect properties
-        lineColor = (0, 0, 255) # (B,G,R)
+        lineColor = rectColor # (B,G,R)
         lineThickness = 2
         lineType = cv.LINE_8
         markerColor = (0, 255, 255) # (B,G,R)
@@ -78,5 +82,5 @@ def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode):
 
 
 
-points = findImageMatches("./imgRef/PvZ.png", "./imgRef/peaShooter.png", thresholdVal = 0.7, mode = "points")
-# points = findImageMatches("albion_turnip.jpg", "albion_farm.jpg", thresholdVal = 0.7, mode = "rectangles")
+# points = findImageMatches("./imgRef/PvZ.png", "./imgRef/peaShooter.png", thresholdVal = 0.7, mode = "points")
+points = findImageMatches("./imgRef/xx.png", "./imgRef/yy.png", thresholdVal = 0.3, mode = "rectangles", rectColor = (0, 255, 0))
