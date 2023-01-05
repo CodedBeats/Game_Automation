@@ -21,6 +21,24 @@ body {
     grid-template-rows: auto;
 }
 
+.winner-container {
+    position: relative;
+}
+.winner-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 70px;
+    font-size: 4em;
+}
+.restart-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 350%);
+    font-size: 1.5em;
+}
 
 /* tiles and backgrounds */
 img {
@@ -30,29 +48,4 @@ img {
 .tile {
     width: 200px;
     height: 200px;
-}
-
-.tc1 {
-    background-color: aqua;  
-}
-.tc2 {
-    background-color: brown;
-}
-.tc3 {
-    background-color: yellowgreen;
-}
-.tc4 {
-    background-color: brown;
-}
-.tc5 {
-    background-color: goldenrod;
-}
-.tc6 {
-    background-color: goldenrod;
-}
-.tc7 {
-    background-color: aqua;  
-}
-.tc8 {
-    background-color: yellowgreen;
 }

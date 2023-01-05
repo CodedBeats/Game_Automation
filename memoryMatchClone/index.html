@@ -12,31 +12,76 @@
 
     <div class="tile-container">
         <div class="tiles">
-            <div class="tile tc1" onclick="revealTile(`t1`)">
-                <img id="t1" src="./images/unknownTile.png" width="200" height="200">
+            <div 
+                id="t1" 
+                class="tile tc1" 
+                onclick="revealTile(`img1`, `t1`)" 
+                style="background-color: aqua;"
+            >
+                <img id="img1" src="./images/unknownTile.png" width="200" height="200">
             </div>
-            <div class="tile tc2" onclick="revealTile(`t2`)">
-                <img id="t2" src="./images/unknownTile.png" width="200" height="200">
+            <div 
+                id="t2" 
+                class="tile tc2" 
+                onclick="revealTile(`img2`, `t2`)" 
+                style="background-color: brown;"
+            >
+                <img id="img2" src="./images/unknownTile.png" width="200" height="200">
             </div>
-            <div class="tile tc3" onclick="revealTile(`t3`)">
-                <img id="t3" src="./images/unknownTile.png" width="200" height="200">
+            <div 
+                id="t3" 
+                class="tile tc3" 
+                onclick="revealTile(`img3`, `t3`)" 
+                style="background-color: yellowgreen;"
+            >
+                <img id="img3" src="./images/unknownTile.png" width="200" height="200">
             </div>
-            <div class="tile tc4" onclick="revealTile(`t4`)">
-                <img id="t4" src="./images/unknownTile.png" width="200" height="200">
+            <div 
+                id="t4" 
+                class="tile tc4" 
+                onclick="revealTile(`img4`, `t4`)" 
+                style="background-color: brown;"
+            >
+                <img id="img4" src="./images/unknownTile.png" width="200" height="200">
             </div>
-            <div class="tile tc5" onclick="revealTile(`t5`)">
-                <img id="t5" src="./images/unknownTile.png" width="200" height="200">
+            <div 
+                id="t5" 
+                class="tile tc5" 
+                onclick="revealTile(`img5`, `t5`)" 
+                style="background-color: goldenrod;"
+            >
+                <img id="img5" src="./images/unknownTile.png" width="200" height="200">
             </div>
-            <div class="tile tc6" onclick="revealTile(`t6`)">
-                <img id="t6" src="./images/unknownTile.png" width="200" height="200">
+            <div 
+                id="t6" 
+                class="tile tc6" 
+                onclick="revealTile(`img6`, `t6`)" 
+                style="background-color: goldenrod;"
+            >
+                <img id="img6" src="./images/unknownTile.png" width="200" height="200">
             </div>
-            <div class="tile tc7" onclick="revealTile(`t7`)">
-                <img id="t7" src="./images/unknownTile.png" width="200" height="200">
+            <div 
+                id="t7" 
+                class="tile tc7" 
+                onclick="revealTile(`img7`, `t7`)" 
+                style="background-color: aqua;"
+            >
+                <img id="img7" src="./images/unknownTile.png" width="200" height="200">
             </div>
-            <div class="tile tc8" onclick="revealTile(`t8`)">
-                <img id="t8" src="./images/unknownTile.png" width="200" height="200">
+            <div 
+                id="t8" 
+                class="tile tc8" 
+                onclick="revealTile(`img8`, `t8`)" 
+                style="background-color: yellowgreen;"
+            >
+                <img id="img8" src="./images/unknownTile.png" width="200" height="200">
             </div>
         </div>
+    </div>
+
+    <div id="won" class="winner-container" style="display: none;">
+        <h1 class="winner-title">You've Found All Pairs</h1>
+        <button id="restart" class="restart-button" onclick="restartGame()">Restart Game</button>
     </div>
 
     <script src="script.js"></script>
