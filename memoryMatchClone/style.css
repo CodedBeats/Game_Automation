@@ -1,8 +1,58 @@
 body {
     font-family: sans-serif;
-    color: #333;
+    color: rgb(0, 0, 0);
 }
 
-h1 {
-    color: #069;
+.tiles-container {
+    position: relative;
+}
+
+.tiles {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(102, 102, 102);
+    
+    display: grid;
+    column-gap: 30px;
+    row-gap: 30px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+}
+
+
+/* tiles and backgrounds */
+img {
+    height: 100%
+}
+
+.tile {
+    width: 200px;
+    height: 200px;
+}
+
+.tc1 {
+    background-color: aqua;  
+}
+.tc2 {
+    background-color: brown;
+}
+.tc3 {
+    background-color: yellowgreen;
+}
+.tc4 {
+    background-color: brown;
+}
+.tc5 {
+    background-color: goldenrod;
+}
+.tc6 {
+    background-color: goldenrod;
+}
+.tc7 {
+    background-color: aqua;  
+}
+.tc8 {
+    background-color: yellowgreen;
 }
