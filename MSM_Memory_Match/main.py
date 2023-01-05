@@ -96,15 +96,33 @@ def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode, lineC
 
 
 
-def captureScreenshot(fileName):
+def captureScreenshot(fileName, mode, x, y, w, h):
     # take a screenshot of the screen and store it in memory, then
     # convert the PIL/Pillow image to an OpenCV compatible NumPy array
     # and finally write the image to disk
-    image = pyautogui.screenshot()
+    if mode == "full":
+        image = pyautogui.screenshot()
+    elif mode == "coords":
+        image = pyautogui.screenshot(region = (x, y, w, h))
+
     image = cv.cvtColor(np.array(image), cv.COLOR_RGB2BGR)
     cv.imwrite("./imgRef/" + fileName, image)
-    
-# captureScreenshot("new_img.png")
 
 
-points = findImageMatches("./imgRef/boardClone.png", "./imgRef/unknownTileClone.png", thresholdVal = 0.75, mode = "points", lineColor = (0, 255, 0))
+def getTileImages():
+    counter = 1
+    length = len(tiles)
+    # iterate of each tile in tiles arr
+    for i in range(length):
+        print(tiles[i].x, tiles[i].y, tiles[i].w, tiles[i].h)
+        # take image at given coords
+        captureScreenshot("img_" + str(counter) + ".png", "coords", tiles[i].x + 186, tiles[i].y + 52, tiles[i].w, tiles[i].h)
+        counter += 1
+
+
+
+
+
+
+findImageMatches("./imgRef/boardClone.png", "./imgRef/unknownTileClone.png", thresholdVal = 0.75, mode = "rectangles", lineColor = (0, 255, 0))
+getTileImages()
