@@ -27,8 +27,9 @@ let restartGame = () => {
         img.style.display = "block"
     });
 
-    // reset moves made and change text
+    // reset moves made and score, remove winning text 
     moves = 0
+    score = 0
     moveCounter.innerHTML = `Moves Made: ${moves}`
 }
 
