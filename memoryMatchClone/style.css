@@ -29,14 +29,14 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    margin-top: 70px;
+    margin-top: 50px;
     font-size: 4em;
 }
 .restart-button {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, 350%);
+    transform: translate(-50%, 265%);
     font-size: 1.5em;
 }
 
