@@ -1,5 +1,7 @@
 import cv2 as cv
 import numpy as np
+import pyautogui
+import imutils
 
 # wrap all this code in a function
 def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode, lineColor = (0, 0, 255)):
@@ -78,4 +80,15 @@ def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode, lineC
 
 
 
-points = findImageMatches("./imgRef/board1.png", "./imgRef/unknownTile.png", thresholdVal = 0.75, mode = "rectangles", lineColor = (0, 255, 0))
+def captureScreenshot(fileName):
+    # take a screenshot of the screen and store it in memory, then
+    # convert the PIL/Pillow image to an OpenCV compatible NumPy array
+    # and finally write the image to disk
+    image = pyautogui.screenshot()
+    image = cv.cvtColor(np.array(image), cv.COLOR_RGB2BGR)
+    cv.imwrite("./imgRef/" + fileName, image)
+    
+captureScreenshot("new_img.png")
+
+
+# points = findImageMatches("./imgRef/boardClone.png", "./imgRef/unknownTileClone.png", thresholdVal = 0.75, mode = "rectangles", lineColor = (0, 255, 0))
