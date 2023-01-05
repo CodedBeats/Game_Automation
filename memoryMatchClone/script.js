@@ -85,3 +85,10 @@ let revealTile = (imgID, tileID) => {
         picked += 1
     }
 }
+
+/*
+======
+    There are lots of errors that can occur
+    But this small game is just designed for testing image matching programs
+======
+*/
