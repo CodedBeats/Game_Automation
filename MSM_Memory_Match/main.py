@@ -120,9 +120,7 @@ def getTileImages():
         counter += 1
 
 
-
-
-
-
+# find all matches
 findImageMatches("./imgRef/boardClone.png", "./imgRef/unknownTileClone.png", thresholdVal = 0.75, mode = "rectangles", lineColor = (0, 255, 0))
+# create images for each match found
 getTileImages()
