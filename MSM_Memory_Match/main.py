@@ -3,6 +3,20 @@ import numpy as np
 import pyautogui
 import imutils
 
+
+# declare tile class to create instances and add to arr of tiles
+class tile:
+    def __init__(self, x, y, w, h, centerX, centerY):
+        self.x = x
+        self.y = y
+        self.w = w
+        self.h = h
+        self.centerX = centerX
+        self.centerY = centerY
+tiles = []
+
+
+
 # wrap all this code in a function
 def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode, lineColor = (0, 0, 255)):
 
@@ -50,18 +64,20 @@ def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode, lineC
 
         # loop over each location
         for (x, y, w, h) in rectangles:
+            # determine rect pos
+            topLeft = (x, y)
+            bottomRight = (x + w, y + h)
+            # get center of rect
+            centerX = x + int(w/2)
+            centerY = y + int(h/2)
+            # add rect data to tiles arr
+            tiles.append(tile(x, y, w, h, centerX, centerY))
 
             if mode == "rectangles":
-                # determine rect pos
-                topLeft = (x, y)
-                bottomRight = (x + w, y + h)
-                # draw the box
+                # draw the rect
                 cv.rectangle(baseImage, topLeft, bottomRight, lineColor, lineThickness, lineType)
 
             elif mode == "points":
-                # get center of rect
-                centerX = x + int(w/2)
-                centerY = y + int(h/2)
                 # save points
                 points.append((centerX, centerY))
                 # draw the center point
@@ -88,7 +104,7 @@ def captureScreenshot(fileName):
     image = cv.cvtColor(np.array(image), cv.COLOR_RGB2BGR)
     cv.imwrite("./imgRef/" + fileName, image)
     
-captureScreenshot("new_img.png")
+# captureScreenshot("new_img.png")
 
 
-# points = findImageMatches("./imgRef/boardClone.png", "./imgRef/unknownTileClone.png", thresholdVal = 0.75, mode = "rectangles", lineColor = (0, 255, 0))
+points = findImageMatches("./imgRef/boardClone.png", "./imgRef/unknownTileClone.png", thresholdVal = 0.75, mode = "points", lineColor = (0, 255, 0))
