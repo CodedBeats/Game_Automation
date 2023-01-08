@@ -120,16 +120,16 @@ def getTileImages():
     for i in range(length):
         print(tiles[i].x, tiles[i].y, tiles[i].w, tiles[i].h)
         # move cursor to tile
-        pyautogui.moveTo(tiles[i].centerX, tiles[i].centerY + 10)
+        pyautogui.moveTo(tiles[i].centerX, tiles[i].centerY + 20)
         # click tile to reveal image
         pyautogui.click()
         # take image at given coords
-        captureScreenshot("img_" + str(counter) + ".png", "coords", tiles[i].x, tiles[i].centerY, tiles[i].w, tiles[i].h)
+        captureScreenshot("./tiles/img_" + str(counter) + ".png", "coords", tiles[i].x, tiles[i].centerY, tiles[i].w, tiles[i].h)
         counter += 1
         time.sleep(1)
 
 
 # find all matches
-findImageMatches("./imgRef/boardClone.png", "./imgRef/unknownTileClone.png", thresholdVal = 0.75, mode = "rectangles", lineColor = (0, 255, 0))
+findImageMatches("./imgRef/boards/boardClone.png", "./imgRef/unknowns/unknownTileClone.png", thresholdVal = 0.75, mode = "rectangles", lineColor = (0, 255, 0))
 # create images for each match found
 getTileImages()
