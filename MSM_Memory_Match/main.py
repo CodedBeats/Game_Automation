@@ -118,7 +118,14 @@ def getTileImages():
     length = len(tiles)
     # iterate of each tile in tiles arr
     for i in range(length):
-        print(tiles[i].x, tiles[i].y, tiles[i].w, tiles[i].h, tiles[i].centerX, tiles[i].centerY)
+        print(
+            "x coord: " + tiles[i].x, 
+            "y coord: " + tiles[i].y, 
+            "width val: " + tiles[i].w, 
+            "height val: " + tiles[i].h, 
+            "center x coord: " + tiles[i].centerX, 
+            "center y coord: " + tiles[i].centerY
+        )
         # move cursor to tile
         pyautogui.moveTo(tiles[i].centerX, tiles[i].centerY + 20)
         # click tile to reveal image
