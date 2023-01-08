@@ -186,10 +186,10 @@ def matchPair(tileImgPath1, tileImgPath2, thresholdVal):
 
     # return true or false depending on if images matched
     if len(locations) >= 1:
-        print("p")
+        # print("p")
         return True
     else:
-        print("n")
+        # print("n")
         return False
 
 
@@ -206,24 +206,20 @@ def getAllPairs():
 
     # loop through all tiles to match all against all (brute force I guess)
     # set tileCounters to 1 for img file ref
-    tile1Counter = 1
     for i in range(length):
-        tile2Counter = 1
         matched = False
         for j in range(length):
             if matched:
                 break
-            elif tile1Counter == tile2Counter:
-                tile2Counter += 1
+            elif i == j:
+                j += 1
                 continue
             else:
-                checkMatch = matchPair("./imgRef/tiles/img_" + str(tile1Counter) + ".png", "./imgRef/tiles/img_" + str(tile2Counter) + ".png", thresholdVal = 0.9)
+                checkMatch = matchPair("./imgRef/tiles/img_" + str(i + 1) + ".png", "./imgRef/tiles/img_" + str(j + 1) + ".png", thresholdVal = 0.8)
                 if checkMatch:
                     pairCount += 1
                     matched = True
-                print("\npairs: " + str(pairCount), "\nimg: " + str(tile1Counter), "\nimg: " + str(tile2Counter))
-            tile2Counter += 1
-        tile1Counter += 1
+                print("\npairs: " + str(pairCount), "\nimg: " + str(i + 1), "\nimg: " + str(j + 1))
         # print("\npairs: " + str(pairCount))
 
 
@@ -234,13 +230,13 @@ def getAllPairs():
 
 # ======================================================== Call Funcs ======================================================== #
 # find all tiles
-# findTiles("./imgRef/boards/boardClone.png", "./imgRef/unknowns/unknownTileClone.png", thresholdVal = 0.75, mode = "rectangles", lineColor = (0, 255, 0))
+findTiles("./imgRef/boards/boardClone.png", "./imgRef/unknowns/unknownTileClone.png", thresholdVal = 0.75, mode = "rectangles", lineColor = (0, 255, 0))
 
 # get all revealed tile images
 # getTileImages()
 
 # get all pairs
-# getAllPairs()
+getAllPairs()
 
 # match individual images
-matchPair("./imgRef/tiles/img_8.png", "./imgRef/tiles/img_1.png", thresholdVal = 0.9)
+# matchPair("./imgRef/tiles/img_1.png", "./imgRef/tiles/img_6.png", thresholdVal = 0.8)
