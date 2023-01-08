@@ -1,6 +1,7 @@
 import cv2 as cv
 import numpy as np
 import pyautogui
+import time
 import imutils
 
 
@@ -110,14 +111,22 @@ def captureScreenshot(fileName, mode, x, y, w, h):
 
 
 def getTileImages():
+    # wait for me to switch windows
+    time.sleep(4)
+
     counter = 1
     length = len(tiles)
     # iterate of each tile in tiles arr
     for i in range(length):
         print(tiles[i].x, tiles[i].y, tiles[i].w, tiles[i].h)
+        # move cursor to tile
+        pyautogui.moveTo(tiles[i].centerX, tiles[i].centerY + 20, duration = 0.2)
+        # click tile to reveal image
+        pyautogui.click()
         # take image at given coords
-        captureScreenshot("img_" + str(counter) + ".png", "coords", tiles[i].x + 186, tiles[i].y + 52, tiles[i].w, tiles[i].h)
+        captureScreenshot("img_" + str(counter) + ".png", "coords", tiles[i].x, tiles[i].centerY, tiles[i].w, tiles[i].h)
         counter += 1
+        time.sleep(1)
 
 
 # find all matches
