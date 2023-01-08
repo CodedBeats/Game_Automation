@@ -29,7 +29,7 @@ class pair:
 
 
 # ======================================================== Find Tile Coords Func ======================================================== #
-def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode, lineColor = (0, 0, 255)):
+def findTiles(baseImagePath, isolatedImagePath, thresholdVal, mode, lineColor = (0, 0, 255)):
 
     # define imgs as variables 
     baseImage = cv.imread(baseImagePath, cv.IMREAD_UNCHANGED)
@@ -46,7 +46,7 @@ def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode, lineC
     method = cv.TM_CCOEFF_NORMED
     result = cv.matchTemplate(baseImage, isolatedImage, method)
     
-    # Get all positions from the match result that exceed the threshold
+    # Get all positions from the match result that exceed the threshold (retunrs array)
     locations = np.where(result >= threshold)
     # refine the locations array to just return x and y coordinates of each matched location
     locations = list(zip(*locations[::-1]))
@@ -137,7 +137,7 @@ def getTileImages():
 
     counter = 1
     length = len(tiles)
-    # iterate of each tile in tiles arr
+    # iterate over each tile in tiles arr
     for i in range(length):
         print(
             "tile name: " + tiles[i].tileName,
@@ -155,7 +155,9 @@ def getTileImages():
         pyautogui.click()
         time.sleep(0.5)
         # take image at given coords
-        captureScreenshot("./tiles/img_" + str(counter) + ".png", "coords", tiles[i].x, tiles[i].y, tiles[i].w, tiles[i].h)
+        # captureScreenshot("./tiles/img_" + str(counter) + ".png", "coords", tiles[i].x, tiles[i].y, tiles[i].w, tiles[i].h)
+        # temp y coord for game cloe
+        captureScreenshot("./tiles/img_" + str(counter) + ".png", "coords", tiles[i].x, tiles[i].centerY, tiles[i].w, tiles[i].h)
         counter += 1
         time.sleep(1)
 
@@ -163,8 +165,82 @@ def getTileImages():
 
 
 
+# ======================================================== Match Pair Func ======================================================== #
+def matchPair(tileImgPath1, tileImgPath2, thresholdVal):
+    # define imgs as variables 
+    img1 = cv.imread(tileImgPath1, cv.IMREAD_UNCHANGED)
+    img2 = cv.imread(tileImgPath2, cv.IMREAD_UNCHANGED)
+
+    # set a threshold for matching accuracy
+    threshold = thresholdVal
+
+    # match img2 against img1 with 1 of the following methods
+    # TM_CCOEFF, TM_CCOEFF_NORMED, TM_CCORR, TM_CCORR_NORMED, TM_SQDIFF, TM_SQDIFF_NORMED
+    method = cv.TM_CCOEFF_NORMED
+    result = cv.matchTemplate(img1, img2, method)
+    
+    # Get all positions from the match result that exceed the threshold (retunrs array)
+    locations = np.where(result >= threshold)
+    # refine the locations array to just return x and y coordinates of each matched location
+    locations = list(zip(*locations[::-1]))
+
+    # return true or false depending on if images matched
+    if len(locations) >= 1:
+        print("p")
+        return True
+    else:
+        print("n")
+        return False
+
+
+
+
+
+# ======================================================== Get All Pairs Func ======================================================== #
+def getAllPairs():
+    pairCount = 0
+    # get length for both loops
+    length = len(tiles)
+    # set matched to bool so it can be used to stop the inner loop
+    matched = False
+
+    # loop through all tiles to match all against all (brute force I guess)
+    # set tileCounters to 1 for img file ref
+    tile1Counter = 1
+    for i in range(length):
+        tile2Counter = 1
+        matched = False
+        for j in range(length):
+            if matched:
+                break
+            elif tile1Counter == tile2Counter:
+                tile2Counter += 1
+                continue
+            else:
+                checkMatch = matchPair("./imgRef/tiles/img_" + str(tile1Counter) + ".png", "./imgRef/tiles/img_" + str(tile2Counter) + ".png", thresholdVal = 0.9)
+                if checkMatch:
+                    pairCount += 1
+                    matched = True
+                print("\npairs: " + str(pairCount), "\nimg: " + str(tile1Counter), "\nimg: " + str(tile2Counter))
+            tile2Counter += 1
+        tile1Counter += 1
+        # print("\npairs: " + str(pairCount))
+
+
+        
+
+
+
+
 # ======================================================== Call Funcs ======================================================== #
-# find all matches
-findImageMatches("./imgRef/boards/boardClone.png", "./imgRef/unknowns/unknownTileClone.png", thresholdVal = 0.75, mode = "rectangles", lineColor = (0, 255, 0))
-# create images for each match found
-getTileImages()
+# find all tiles
+# findTiles("./imgRef/boards/boardClone.png", "./imgRef/unknowns/unknownTileClone.png", thresholdVal = 0.75, mode = "rectangles", lineColor = (0, 255, 0))
+
+# get all revealed tile images
+# getTileImages()
+
+# get all pairs
+# getAllPairs()
+
+# match individual images
+matchPair("./imgRef/tiles/img_8.png", "./imgRef/tiles/img_1.png", thresholdVal = 0.9)
