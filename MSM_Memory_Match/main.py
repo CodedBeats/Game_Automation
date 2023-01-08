@@ -206,7 +206,8 @@ def getAllPairs():
 
     # loop through all tiles to match all against all (brute force I guess)
     for i in range(length):
-        print(matched)
+        # print(matched)
+
         for j in range(length):
             # if i already has it's match, we skip to next i
             if i in matched:
@@ -239,7 +240,7 @@ def getAllPairs():
 findTiles("./imgRef/boards/boardClone.png", "./imgRef/unknowns/unknownTileClone.png", thresholdVal = 0.75, mode = "rectangles", lineColor = (0, 255, 0))
 
 # get all revealed tile images
-# getTileImages()
+getTileImages()
 
 # get all pairs
 getAllPairs()
