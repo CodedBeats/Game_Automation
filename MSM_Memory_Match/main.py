@@ -120,7 +120,7 @@ def getTileImages():
     for i in range(length):
         print(tiles[i].x, tiles[i].y, tiles[i].w, tiles[i].h)
         # move cursor to tile
-        pyautogui.moveTo(tiles[i].centerX, tiles[i].centerY + 20, duration = 0.2)
+        pyautogui.moveTo(tiles[i].centerX, tiles[i].centerY + 10)
         # click tile to reveal image
         pyautogui.click()
         # take image at given coords
