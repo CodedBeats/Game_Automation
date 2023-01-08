@@ -20,10 +20,10 @@ tiles = []
 # ======================================================== Pairs Class ======================================================== #
 # declare pair class for matching pairs
 class pair:
-    def __init__(self, pairName, p1, p2):
+    def __init__(self, pairName, t1, t2):
         self.pairName = pairName
-        self.p1 = p1
-        self.p2 = p2
+        self.t1 = t1
+        self.t2 = t2
 pairs = []
 
 
@@ -234,7 +234,7 @@ def getAllPairs():
                     print("Pair " + str(pairCount) + ": ", str(i + 1) + " and " + str(j + 1))
 
                     # added a new pair and give thir x and y coords as centerX and centerY of tiles i and j respectively
-                    pairs.append(pair("Pair_" + str(pairCount), [tiles[i].centerX, tiles[i].centerY], [tiles[j].centerX, tiles[j].centerY]))
+                    pairs.append(pair("Pair_" + str(pairCount), [tiles[i].centerX, tiles[i].centerY + 10], [tiles[j].centerX, tiles[j].centerY + 10]))
 
                 # print("\npairs: " + str(pairCount), "\nimg: " + str(i + 1), "\nimg: " + str(j + 1), "\nmatched: " + str(doesMatch))
 
@@ -248,12 +248,23 @@ def locatePairs():
     print("\n\n==== Pair Positions ====\n")
     length = len(pairs)
     for i in range(length):
+        time.sleep(1)
         print(
             pairs[i].pairName,
-            "\nPosition 1 - \n\t" + "x: " + str(pairs[i].p1[0]) + "\n\ty: " + str(pairs[i].p2[0]), 
-            "\nPosition 2 - \n\t" + "x: " + str(pairs[i].p1[1]) + "\n\ty: " + str(pairs[i].p2[1]),
+            "\nPosition 1 - \n\t" + "x: " + str(pairs[i].t1[0]) + "\n\ty: " + str(pairs[i].t1[1]), 
+            "\nPosition 2 - \n\t" + "x: " + str(pairs[i].t2[0]) + "\n\ty: " + str(pairs[i].t2[1]),
             "\n-------------"
         )
+
+        # move to tile1 of pair and click
+        pyautogui.moveTo(pairs[i].t1[0], pairs[i].t1[1])
+        pyautogui.click()
+        time.sleep(0.5)
+        # move to tile2 of pair and click
+        pyautogui.moveTo(pairs[i].t2[0], pairs[i].t2[1])
+        pyautogui.click()
+        time.sleep(0.5)
+        
 
 
 
