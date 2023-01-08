@@ -159,9 +159,9 @@ def getTileImages():
         pyautogui.click()
         time.sleep(0.5)
         # take image at given coords
-        # captureScreenshot("./tiles/img_" + str(counter) + ".png", "coords", tiles[i].x, tiles[i].y, tiles[i].w, tiles[i].h)
-        # temp y coord for game cloe
-        captureScreenshot("./tiles/img_" + str(counter) + ".png", "coords", tiles[i].x, tiles[i].centerY, tiles[i].w, tiles[i].h)
+        captureScreenshot("./tiles/img_" + str(counter) + ".png", "coords", tiles[i].x, tiles[i].y, tiles[i].w, tiles[i].h)
+        # # temp y coord for game cloe
+        # captureScreenshot("./tiles/img_" + str(counter) + ".png", "coords", tiles[i].x, tiles[i].centerY, tiles[i].w, tiles[i].h)
         counter += 1
         time.sleep(1)
 
@@ -273,7 +273,7 @@ def locatePairs():
 
 # ======================================================== Call Funcs ======================================================== #
 # find all tiles
-findTiles("./imgRef/boards/boardClone.png", "./imgRef/unknowns/unknownTileClone.png", thresholdVal = 0.75, mode = "rectangles", lineColor = (0, 255, 0))
+findTiles("./imgRef/boards/board9.png", "./imgRef/unknowns/unknown9.png", thresholdVal = 0.75, mode = "rectangles", lineColor = (0, 255, 0))
 
 # get all revealed tile images
 getTileImages()
