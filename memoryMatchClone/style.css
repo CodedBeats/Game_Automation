@@ -12,7 +12,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgb(102, 102, 102);
+    /* background-color: rgb(102, 102, 102); */
     
     display: grid;
     column-gap: 30px;

@@ -10,7 +10,7 @@ let tileImgs = []
 
 let checkMatch = (t1, t2) => {
     let matches = false
-    if (t1.style.backgroundColor == t2.style.backgroundColor) {
+    if (t1.style.backgroundImage == t2.style.backgroundImage) {
         matches = true
     }
     // return a bool to be assigned to a variable when calling the func
