@@ -4,10 +4,11 @@ import pyautogui
 import time
 import imutils
 
-
+# ======================================================== Tile Class ======================================================== #
 # declare tile class to create instances and add to arr of tiles
 class tile:
-    def __init__(self, x, y, w, h, centerX, centerY):
+    def __init__(self, tileName, x, y, w, h, centerX, centerY):
+        self.tileName = tileName
         self.x = x
         self.y = y
         self.w = w
@@ -16,9 +17,18 @@ class tile:
         self.centerY = centerY
 tiles = []
 
+# ======================================================== Pairs Class ======================================================== #
+# declare pair class for matching pairs
+class pair:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
 
 
-# wrap all this code in a function
+
+
+
+# ======================================================== Find Tile Coords Func ======================================================== #
 def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode, lineColor = (0, 0, 255)):
 
     # define imgs as variables 
@@ -54,6 +64,8 @@ def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode, lineC
 
     points = []
     if len(rectangles):
+        # set counter to 1 for naming convention
+        counter = 1
         # set rect properties
         lineColor = lineColor # (B,G,R)
         lineThickness = 2
@@ -72,7 +84,7 @@ def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode, lineC
             centerX = x + int(w/2)
             centerY = y + int(h/2)
             # add rect data to tiles arr
-            tiles.append(tile(x, y, w, h, centerX, centerY))
+            tiles.append(tile("tile_" + str(counter), x, y, w, h, centerX, centerY))
 
             if mode == "rectangles":
                 # draw the rect
@@ -83,6 +95,8 @@ def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode, lineC
                 points.append((centerX, centerY))
                 # draw the center point
                 cv.drawMarker(baseImage, (centerX, centerY), markerColor, markerType, markerSize, markerThickness)
+            # increment counter
+            counter += 1
 
         if mode:
             # display baseImage with matched data
@@ -97,6 +111,9 @@ def findImageMatches(baseImagePath, isolatedImagePath, thresholdVal, mode, lineC
 
 
 
+
+
+# ======================================================== Take Screenshot Func ======================================================== #
 def captureScreenshot(fileName, mode, x, y, w, h):
     # take a screenshot of the screen and store it in memory, then
     # convert the PIL/Pillow image to an OpenCV compatible NumPy array
@@ -110,6 +127,10 @@ def captureScreenshot(fileName, mode, x, y, w, h):
     cv.imwrite("./imgRef/" + fileName, image)
 
 
+
+
+
+# ======================================================== Get Tile Images Func ======================================================== #
 def getTileImages():
     # wait for me to switch windows
     time.sleep(4)
@@ -119,12 +140,14 @@ def getTileImages():
     # iterate of each tile in tiles arr
     for i in range(length):
         print(
-            "x coord: " + tiles[i].x, 
-            "y coord: " + tiles[i].y, 
-            "width val: " + tiles[i].w, 
-            "height val: " + tiles[i].h, 
-            "center x coord: " + tiles[i].centerX, 
-            "center y coord: " + tiles[i].centerY
+            "tile name: " + tiles[i].tileName,
+            "\n\tx coord: " + str(tiles[i].x), 
+            "\n\ty coord: " + str(tiles[i].y), 
+            "\n\twidth val: " + str(tiles[i].w), 
+            "\n\theight val: " + str(tiles[i].h), 
+            "\n\tcenter x coord: " + str(tiles[i].centerX), 
+            "\n\tcenter y coord: " + str(tiles[i].centerY),
+            "\n----\n"
         )
         # move cursor to tile
         pyautogui.moveTo(tiles[i].centerX, tiles[i].centerY + 20)
@@ -137,7 +160,11 @@ def getTileImages():
         time.sleep(1)
 
 
+
+
+
+# ======================================================== Call Funcs ======================================================== #
 # find all matches
-findImageMatches("./imgRef/boards/board4.png", "./imgRef/unknowns/unknown4.png", thresholdVal = 0.75, mode = "rectangles", lineColor = (0, 255, 0))
+findImageMatches("./imgRef/boards/boardClone.png", "./imgRef/unknowns/unknownTileClone.png", thresholdVal = 0.75, mode = "rectangles", lineColor = (0, 255, 0))
 # create images for each match found
 getTileImages()
