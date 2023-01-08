@@ -20,9 +20,11 @@ tiles = []
 # ======================================================== Pairs Class ======================================================== #
 # declare pair class for matching pairs
 class pair:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
+    def __init__(self, pairName, p1, p2):
+        self.pairName = pairName
+        self.p1 = p1
+        self.p2 = p2
+pairs = []
 
 
 
@@ -132,6 +134,8 @@ def captureScreenshot(fileName, mode, x, y, w, h):
 
 # ======================================================== Get Tile Images Func ======================================================== #
 def getTileImages():
+    # new section of data display
+    print("\n\n==== Tile Image Data ====\n")
     # wait for me to switch windows
     time.sleep(4)
 
@@ -198,6 +202,8 @@ def matchPair(tileImgPath1, tileImgPath2, thresholdVal):
 
 # ======================================================== Get All Pairs Func ======================================================== #
 def getAllPairs():
+    # new section of data display
+    print("\n\n==== Tile Matches ====\n")
     pairCount = 0
     # get length for both loops
     length = len(tiles)
@@ -225,12 +231,31 @@ def getAllPairs():
                     pairCount += 1
                     matched.append(i)
                     matched.append(j)
-                    print("Match " + str(pairCount) + ": ", str(i + 1) + " and " + str(j + 1))
+                    print("Pair " + str(pairCount) + ": ", str(i + 1) + " and " + str(j + 1))
+
+                    # added a new pair and give thir x and y coords as centerX and centerY of tiles i and j respectively
+                    pairs.append(pair("Pair_" + str(pairCount), [tiles[i].centerX, tiles[i].centerY], [tiles[j].centerX, tiles[j].centerY]))
 
                 # print("\npairs: " + str(pairCount), "\nimg: " + str(i + 1), "\nimg: " + str(j + 1), "\nmatched: " + str(doesMatch))
 
 
-        
+
+
+
+# ======================================================== Find and Locate All Pairs Func ======================================================== #
+def locatePairs():
+    # new section of data display
+    print("\n\n==== Pair Positions ====\n")
+    length = len(pairs)
+    for i in range(length):
+        print(
+            pairs[i].pairName,
+            "\nPosition 1 - \n\t" + "x: " + str(pairs[i].p1[0]) + "\n\ty: " + str(pairs[i].p2[0]), 
+            "\nPosition 2 - \n\t" + "x: " + str(pairs[i].p1[1]) + "\n\ty: " + str(pairs[i].p2[1]),
+            "\n-------------"
+        )
+
+
 
 
 
@@ -244,6 +269,9 @@ getTileImages()
 
 # get all pairs
 getAllPairs()
+
+# find and locate all pairs
+locatePairs()
 
 # match individual images
 # matchPair("./imgRef/tiles/img_1.png", "./imgRef/tiles/img_6.png", thresholdVal = 0.8)
