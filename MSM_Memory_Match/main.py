@@ -201,26 +201,32 @@ def getAllPairs():
     pairCount = 0
     # get length for both loops
     length = len(tiles)
-    # set matched to bool so it can be used to stop the inner loop
-    matched = False
+    # have exclude list so we don't get 2x pairs (2 and 4 match, 4 and 2 match)
+    matched = []
 
     # loop through all tiles to match all against all (brute force I guess)
-    # set tileCounters to 1 for img file ref
     for i in range(length):
-        matched = False
+        print(matched)
         for j in range(length):
-            if matched:
+            # if i already has it's match, we skip to next i
+            if i in matched:
                 break
+            # if we are comparing the same image, we skip to next j
             elif i == j:
                 j += 1
                 continue
+
             else:
+                # compare image i and j
                 checkMatch = matchPair("./imgRef/tiles/img_" + str(i + 1) + ".png", "./imgRef/tiles/img_" + str(j + 1) + ".png", thresholdVal = 0.8)
+                # if they match we increment pairCount and add i to the matched arr
                 if checkMatch:
                     pairCount += 1
-                    matched = True
-                print("\npairs: " + str(pairCount), "\nimg: " + str(i + 1), "\nimg: " + str(j + 1))
-        # print("\npairs: " + str(pairCount))
+                    matched.append(i)
+                    matched.append(j)
+                    print("Match " + str(pairCount) + ": ", str(i + 1) + " and " + str(j + 1))
+
+                # print("\npairs: " + str(pairCount), "\nimg: " + str(i + 1), "\nimg: " + str(j + 1), "\nmatched: " + str(doesMatch))
 
 
         
