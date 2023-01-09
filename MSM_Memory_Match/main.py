@@ -163,7 +163,7 @@ def getTileImages():
         # # temp y coord for game cloe
         # captureScreenshot("./tiles/img_" + str(counter) + ".png", "coords", tiles[i].x, tiles[i].centerY, tiles[i].w, tiles[i].h)
         counter += 1
-        time.sleep(1)
+        time.sleep(0.5)
 
 
 
@@ -234,7 +234,7 @@ def getAllPairs():
                     print("Pair " + str(pairCount) + ": ", str(i + 1) + " and " + str(j + 1))
 
                     # added a new pair and give thir x and y coords as centerX and centerY of tiles i and j respectively
-                    pairs.append(pair("Pair_" + str(pairCount), [tiles[i].centerX, tiles[i].centerY + 10], [tiles[j].centerX, tiles[j].centerY + 10]))
+                    pairs.append(pair("Pair_" + str(pairCount), [tiles[i].centerX, tiles[i].centerY], [tiles[j].centerX, tiles[j].centerY]))
 
                 # print("\npairs: " + str(pairCount), "\nimg: " + str(i + 1), "\nimg: " + str(j + 1), "\nmatched: " + str(doesMatch))
 
@@ -248,7 +248,7 @@ def locatePairs():
     print("\n\n==== Pair Positions ====\n")
     length = len(pairs)
     for i in range(length):
-        time.sleep(1)
+        time.sleep(0.5)
         print(
             pairs[i].pairName,
             "\nPosition 1 - \n\t" + "x: " + str(pairs[i].t1[0]) + "\n\ty: " + str(pairs[i].t1[1]), 
@@ -259,13 +259,29 @@ def locatePairs():
         # move to tile1 of pair and click
         pyautogui.moveTo(pairs[i].t1[0], pairs[i].t1[1])
         pyautogui.click()
-        time.sleep(0.5)
+        time.sleep(0.2)
         # move to tile2 of pair and click
         pyautogui.moveTo(pairs[i].t2[0], pairs[i].t2[1])
         pyautogui.click()
-        time.sleep(0.5)
+        time.sleep(0.2)
         
 
+
+
+
+# ======================================================== Startup Function ======================================================== #
+# 1. take screenshot of board
+# 2. identify what board we are currently on (can probably re-use same funcs)
+# 3. delete screenshot
+# 4. match unknown tile with board
+# 5. run findTiles() with board and unknown (but don't bring up new window)
+# 6. run getTileImages()
+# 7. run getAllPairs()
+# 8. run locatePairs()
+# 9. click to next level
+# 10. delete all tile images
+# 11. reset tiles and pairs arr 
+# 12. go back to step 1 while levelsCompleted <= 9
 
 
 
