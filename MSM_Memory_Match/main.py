@@ -248,7 +248,7 @@ def locatePairs():
     print("\n\n==== Pair Positions ====\n")
     length = len(pairs)
     for i in range(length):
-        time.sleep(0.5)
+        time.sleep(0.2)
         print(
             pairs[i].pairName,
             "\nPosition 1 - \n\t" + "x: " + str(pairs[i].t1[0]) + "\n\ty: " + str(pairs[i].t1[1]), 
