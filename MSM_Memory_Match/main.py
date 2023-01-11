@@ -31,6 +31,8 @@ pairs = []
 
 # ======================================================== Find Tile Coords Func ======================================================== #
 def findTiles(baseImagePath, isolatedImagePath, thresholdVal, mode, lineColor = (0, 0, 255)):
+    # set tiles arr to empty here since we want it to reset every time this func is called in automate()
+    # tiles = []
 
     # define imgs as variables 
     baseImage = cv.imread(baseImagePath, cv.IMREAD_UNCHANGED)
@@ -212,6 +214,8 @@ def matchPair(imgPath1, imgPath2, thresholdVal):
 
 # ======================================================== Get All Pairs Func ======================================================== #
 def getAllPairs(mode):
+    # set pairs arr to empty here since we want it to reset every time this func is called in automate()
+    # pairs = []
     # new section of data display
     print("\n\n==== Tile Matches ====\n")
     
@@ -252,24 +256,27 @@ def getAllPairs(mode):
     
     elif mode == "boards":
         # set length to the amount of boards
-        lenght = 1
+        length = 10
         # take screenshot of whole window (the 0s are just there to fill params, they don't do anything)
         captureScreenshot("./misc/currentBoard.png", "full", 0, 0, 0, 0)
         print("Screenshot taken")
 
         # loop through all board images
-        for i in range(lenght):
+        for i in range(length):
             # check if currentBoard is the same as board i
-            checkMatch = matchPair("./imgRef/misc/currentBoard.png", "./imgRef/boards/board" + str(i + 1) + ".png", thresholdVal = 0.8)
+            checkMatch = matchPair("./imgRef/misc/currentBoard.png", "./imgRef/boards/board" + str(i + 1) + ".png", thresholdVal = 0.9)
             # if it matches, return that board file path
             if checkMatch:
                 # set match as the board path
                 currentBoardPath = "./imgRef/boards/board" + str(i + 1) + ".png"
+                print("Matched with board" + str(i + 1))
                 return currentBoardPath
+            else:
+                print("Couldn't Match a Board")
 
         # delete the screenshot
-        os.remove("./imgRef/misc/currentBoard.png")
-        print("Screenshot deleted")
+        # os.remove("./imgRef/misc/currentBoard.png")
+        # print("Screenshot deleted")
 
 
 
@@ -308,40 +315,25 @@ def locatePairs():
 
 
 # ======================================================== Startup Function ======================================================== #
-# 1. take screenshot of board
-# 2. identify what board we are currently on (can probably re-use same funcs)
-# 3. delete screenshot
-# 4. match unknown tile with board
-# 5. run findTiles() with board and unknown (but don't bring up new window)
-# 6. run getTileImages()
-# 7. run getAllPairs()
-# 8. run locatePairs()
-# 11. reset tiles and pairs arr 
-# 12. go back to step 1 while levelsCompleted <= 9
-
-# 9. click to next level
-# 10. delete all tile images
-
-
 def automate():
+    # Give me 5 sec to change to right window
+    time.sleep(5)
     # set length to 9 for 9 levels 
     length = 9
 
     for i in range(length):
-        # reset tiles and pairs arr for each level
-        tiles = []
-        pairs = []
 
         # get board path
         boardPath = getAllPairs("boards")
         # get number of board to align with unknown
         boardPathSplit = list(boardPath)
         unknownNumber = boardPathSplit[21]
-        unknownPath = "./imgRef/unknowns/unknown" + unknownNumber
+        unknownPath = "./imgRef/unknowns/unknown" + unknownNumber + ".png"
 
         # ===== Run Main Funcs ===== #
         # find all unknown tiles
         findTiles(boardPath, unknownPath, thresholdVal = 0.8, mode = "rectangles", lineColor = (0, 255, 0))
+        print(len(tiles))
 
         # get all revealed tile images
         getTileImages()
@@ -354,23 +346,34 @@ def automate():
         # ========================== #
 
         # wait for level complete animation
+        # time.sleep(3)
+        # delete all tile images
+        # for i in range(len(tiles)):
+        #     "./imgRef/tiles/img_" + str(i + 1) + ".png"
+        #     os.remove("./imgRef/tiles/img_" + str(i + 1) + ".png")
+
+        # wait 2s to be safe
         time.sleep(3)
+
+
+# 1. reset tiles and pairs arr on each iteration of loop
+# 2. delete tile imgaes after each iteration of loop
 
 
 
 
 # ======================================================== Call Funcs ======================================================== #
-# find all tiles
-findTiles("./imgRef/boards/board9.png", "./imgRef/unknowns/unknown9.png", thresholdVal = 0.8, mode = "rectangles", lineColor = (0, 255, 0))
+# # find all tiles
+# findTiles("./imgRef/boards/board9.png", "./imgRef/unknowns/unknown9.png", thresholdVal = 0.8, mode = "rectangles", lineColor = (0, 255, 0))
 
-# get all revealed tile images
-getTileImages()
+# # get all revealed tile images
+# getTileImages()
 
-# get all pairs
-getAllPairs("tiles")
+# # get all pairs
+# getAllPairs("tiles")
 
-# find and locate all pairs
-locatePairs()
+# # find and locate all pairs
+# locatePairs()
 
-# match individual images
-# matchPair("./imgRef/misc/xx.png", "./imgRef/boards/xx.png", thresholdVal = 0.8)
+# Whoop Whoop
+automate()
