@@ -316,6 +316,7 @@ def locatePairs():
 
 # ======================================================== Startup Function ======================================================== #
 def automate():
+    print("Automation Starting")
     # Give me 5 sec to change to right window
     time.sleep(5)
     # set length to 9 for 9 levels 
@@ -358,6 +359,7 @@ def automate():
 
 # 1. reset tiles and pairs arr on each iteration of loop
 # 2. delete tile imgaes after each iteration of loop
+# 3. fix the problem where boards and tiles >= 10 wont work when matching the current board
 
 
 
