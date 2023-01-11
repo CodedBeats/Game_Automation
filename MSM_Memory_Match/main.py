@@ -2,9 +2,9 @@ import cv2 as cv
 import numpy as np
 import pyautogui
 import time
-import imutils
+import os
 
-# ======================================================== Tile Class ======================================================== #
+# ======================================================== Classes ======================================================== #
 # declare tile class to create instances and add to arr of tiles
 class tile:
     def __init__(self, tileName, x, y, w, h, centerX, centerY):
@@ -17,7 +17,6 @@ class tile:
         self.centerY = centerY
 tiles = []
 
-# ======================================================== Pairs Class ======================================================== #
 # declare pair class for matching pairs
 class pair:
     def __init__(self, pairName, t1, t2):
@@ -102,8 +101,9 @@ def findTiles(baseImagePath, isolatedImagePath, thresholdVal, mode, lineColor = 
 
         if mode:
             # display baseImage with matched data
-            cv.imshow("Matched Image", baseImage)
-            cv.waitKey()
+            # cv.imshow("Matched Image", baseImage)
+            # cv.waitKey()
+            print("didn't show rects")
             # save the image
             # cv.imwrite('result_click_point.jpg', haystack_img)
 
@@ -122,11 +122,13 @@ def captureScreenshot(fileName, mode, x, y, w, h):
     # and finally write the image to disk
     if mode == "full":
         image = pyautogui.screenshot()
+        image = cv.cvtColor(np.array(image), cv.COLOR_RGB2BGR)
+        cv.imwrite("./imgRef/" + fileName, image)
     elif mode == "coords":
         image = pyautogui.screenshot(region = (x, y, w, h))
+        image = cv.cvtColor(np.array(image), cv.COLOR_RGB2BGR)
+        cv.imwrite("./imgRef/" + fileName, image)
 
-    image = cv.cvtColor(np.array(image), cv.COLOR_RGB2BGR)
-    cv.imwrite("./imgRef/" + fileName, image)
 
 
 
@@ -170,10 +172,18 @@ def getTileImages():
 
 
 # ======================================================== Match Pair Func ======================================================== #
-def matchPair(tileImgPath1, tileImgPath2, thresholdVal):
+def matchPair(imgPath1, imgPath2, thresholdVal):
     # define imgs as variables 
-    img1 = cv.imread(tileImgPath1, cv.IMREAD_UNCHANGED)
-    img2 = cv.imread(tileImgPath2, cv.IMREAD_UNCHANGED)
+    img1 = cv.imread(imgPath1, cv.IMREAD_UNCHANGED)
+    img2 = cv.imread(imgPath2, cv.IMREAD_UNCHANGED)
+
+    # check dimensions
+    # print(
+    #     img1.shape[0],
+    #     img1.shape[1],
+    #     img2.shape[0],
+    #     img2.shape[1],
+    # )
 
     # set a threshold for matching accuracy
     threshold = thresholdVal
@@ -201,42 +211,66 @@ def matchPair(tileImgPath1, tileImgPath2, thresholdVal):
 
 
 # ======================================================== Get All Pairs Func ======================================================== #
-def getAllPairs():
+def getAllPairs(mode):
     # new section of data display
     print("\n\n==== Tile Matches ====\n")
-    pairCount = 0
-    # get length for both loops
-    length = len(tiles)
-    # have exclude list so we don't get 2x pairs (2 and 4 match, 4 and 2 match)
-    matched = []
+    
+    if mode == "tiles":
+        pairCount = 0
+        # get length for both loops
+        length = len(tiles)
+        # have exclude list so we don't get 2x pairs (2 and 4 match, 4 and 2 match)
+        matched = []
 
-    # loop through all tiles to match all against all (brute force I guess)
-    for i in range(length):
-        # print(matched)
+        # loop through all tiles to match all against all (brute force I guess)
+        for i in range(length):
+            # print(matched)
 
-        for j in range(length):
-            # if i already has it's match, we skip to next i
-            if i in matched:
-                break
-            # if we are comparing the same image, we skip to next j
-            elif i == j:
-                j += 1
-                continue
+            for j in range(length):
+                # if i already has it's match, we skip to next i
+                if i in matched:
+                    break
+                # if we are comparing the same image, we skip to next j
+                elif i == j:
+                    j += 1
+                    continue
 
-            else:
-                # compare image i and j
-                checkMatch = matchPair("./imgRef/tiles/img_" + str(i + 1) + ".png", "./imgRef/tiles/img_" + str(j + 1) + ".png", thresholdVal = 0.8)
-                # if they match we increment pairCount and add i to the matched arr
-                if checkMatch:
-                    pairCount += 1
-                    matched.append(i)
-                    matched.append(j)
-                    print("Pair " + str(pairCount) + ": ", str(i + 1) + " and " + str(j + 1))
+                else:
+                    # compare image i and j
+                    checkMatch = matchPair("./imgRef/tiles/img_" + str(i + 1) + ".png", "./imgRef/tiles/img_" + str(j + 1) + ".png", thresholdVal = 0.8)
+                    # if they match we increment pairCount and add i to the matched arr
+                    if checkMatch:
+                        pairCount += 1
+                        matched.append(i)
+                        matched.append(j)
+                        print("Pair " + str(pairCount) + ": ", str(i + 1) + " and " + str(j + 1))
 
-                    # added a new pair and give thir x and y coords as centerX and centerY of tiles i and j respectively
-                    pairs.append(pair("Pair_" + str(pairCount), [tiles[i].centerX, tiles[i].centerY], [tiles[j].centerX, tiles[j].centerY]))
+                        # added a new pair and give thir x and y coords as centerX and centerY of tiles i and j respectively
+                        pairs.append(pair("Pair_" + str(pairCount), [tiles[i].centerX, tiles[i].centerY], [tiles[j].centerX, tiles[j].centerY]))
 
-                # print("\npairs: " + str(pairCount), "\nimg: " + str(i + 1), "\nimg: " + str(j + 1), "\nmatched: " + str(doesMatch))
+                    # print("\npairs: " + str(pairCount), "\nimg: " + str(i + 1), "\nimg: " + str(j + 1), "\nmatched: " + str(doesMatch))
+    
+    elif mode == "boards":
+        # set length to the amount of boards
+        lenght = 1
+        # take screenshot of whole window (the 0s are just there to fill params, they don't do anything)
+        captureScreenshot("./misc/currentBoard.png", "full", 0, 0, 0, 0)
+        print("Screenshot taken")
+
+        # loop through all board images
+        for i in range(lenght):
+            # check if currentBoard is the same as board i
+            checkMatch = matchPair("./imgRef/misc/currentBoard.png", "./imgRef/boards/board" + str(i + 1) + ".png", thresholdVal = 0.8)
+            # if it matches, return that board file path
+            if checkMatch:
+                # set match as the board path
+                currentBoardPath = "./imgRef/boards/board" + str(i + 1) + ".png"
+                return currentBoardPath
+
+        # delete the screenshot
+        os.remove("./imgRef/misc/currentBoard.png")
+        print("Screenshot deleted")
+
 
 
 
@@ -258,10 +292,14 @@ def locatePairs():
 
         # move to tile1 of pair and click
         pyautogui.moveTo(pairs[i].t1[0], pairs[i].t1[1])
+        # game clone coords
+        # pyautogui.moveTo(pairs[i].t1[0], pairs[i].t1[1] + 20)
         pyautogui.click()
         time.sleep(0.2)
         # move to tile2 of pair and click
         pyautogui.moveTo(pairs[i].t2[0], pairs[i].t2[1])
+        # game clone coords
+        # pyautogui.moveTo(pairs[i].t2[0], pairs[i].t2[1] + 20)
         pyautogui.click()
         time.sleep(0.2)
         
@@ -278,27 +316,61 @@ def locatePairs():
 # 6. run getTileImages()
 # 7. run getAllPairs()
 # 8. run locatePairs()
-# 9. click to next level
-# 10. delete all tile images
 # 11. reset tiles and pairs arr 
 # 12. go back to step 1 while levelsCompleted <= 9
 
+# 9. click to next level
+# 10. delete all tile images
+
+
+def automate():
+    # set length to 9 for 9 levels 
+    length = 9
+
+    for i in range(length):
+        # reset tiles and pairs arr for each level
+        tiles = []
+        pairs = []
+
+        # get board path
+        boardPath = getAllPairs("boards")
+        # get number of board to align with unknown
+        boardPathSplit = list(boardPath)
+        unknownNumber = boardPathSplit[21]
+        unknownPath = "./imgRef/unknowns/unknown" + unknownNumber
+
+        # ===== Run Main Funcs ===== #
+        # find all unknown tiles
+        findTiles(boardPath, unknownPath, thresholdVal = 0.8, mode = "rectangles", lineColor = (0, 255, 0))
+
+        # get all revealed tile images
+        getTileImages()
+
+        # get all pairs
+        getAllPairs("tiles")
+
+        # find and locate all pairs
+        locatePairs()
+        # ========================== #
+
+        # wait for level complete animation
+        time.sleep(3)
 
 
 
 
 # ======================================================== Call Funcs ======================================================== #
 # find all tiles
-findTiles("./imgRef/boards/board9.png", "./imgRef/unknowns/unknown9.png", thresholdVal = 0.75, mode = "rectangles", lineColor = (0, 255, 0))
+findTiles("./imgRef/boards/board9.png", "./imgRef/unknowns/unknown9.png", thresholdVal = 0.8, mode = "rectangles", lineColor = (0, 255, 0))
 
 # get all revealed tile images
 getTileImages()
 
 # get all pairs
-getAllPairs()
+getAllPairs("tiles")
 
 # find and locate all pairs
 locatePairs()
 
 # match individual images
-# matchPair("./imgRef/tiles/img_1.png", "./imgRef/tiles/img_6.png", thresholdVal = 0.8)
+# matchPair("./imgRef/misc/xx.png", "./imgRef/boards/xx.png", thresholdVal = 0.8)
