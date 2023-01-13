@@ -110,7 +110,6 @@ def findTiles(baseImagePath, isolatedImagePath, thresholdVal, mode, lineColor = 
             # save the image
             # cv.imwrite('result_click_point.jpg', haystack_img)
 
-
     else:
         print("Didn't find any matches")
 
@@ -131,7 +130,6 @@ def captureScreenshot(fileName, mode, x, y, w, h):
         image = pyautogui.screenshot(region = (x, y, w, h))
         image = cv.cvtColor(np.array(image), cv.COLOR_RGB2BGR)
         cv.imwrite("./imgRef/" + fileName, image)
-
 
 
 
@@ -274,11 +272,6 @@ def getAllPairs(mode):
                 print("Matched with board" + str(i + 1))
                 return currentBoardPath
 
-        # delete the screenshot
-        os.remove("./imgRef/misc/currentBoard.png")
-        print("Screenshot deleted")
-
-
 
 
 
@@ -324,7 +317,7 @@ def automate():
     length = 9
 
     for i in range(length):
-        print("========== New Iteration ==========")
+        print("\n\n========== New Iteration ==========")
 
         # get board path
         boardPath = getAllPairs("boards")
@@ -358,6 +351,9 @@ def automate():
             "./imgRef/tiles/img_" + str(i + 1) + ".png"
             os.remove("./imgRef/tiles/img_" + str(i + 1) + ".png")
         print("Tiles deleted successfully")
+        # delete the screenshot
+        os.remove("./imgRef/misc/currentBoard.png")
+        print("Screenshot deleted")
 
         # remove everything in tiles and pairs arr to reset them to be used in next iteration
         print("\n\n==== Clearing arrays ====\n")
@@ -367,7 +363,6 @@ def automate():
 
         # wait 2s to be safe
         time.sleep(2)
-
 
 
 
