@@ -276,8 +276,8 @@ def getAllPairs(mode):
                 print("Couldn't Match a Board")
 
         # delete the screenshot
-        # os.remove("./imgRef/misc/currentBoard.png")
-        # print("Screenshot deleted")
+        os.remove("./imgRef/misc/currentBoard.png")
+        print("Screenshot deleted")
 
 
 
@@ -349,18 +349,20 @@ def automate():
         # ========================== #
 
         # wait for level complete animation
-        # time.sleep(3)
+        time.sleep(3)
         # delete all tile images
-        # for i in range(len(tiles)):
-        #     "./imgRef/tiles/img_" + str(i + 1) + ".png"
-        #     os.remove("./imgRef/tiles/img_" + str(i + 1) + ".png")
+        for i in range(len(tiles)):
+            "./imgRef/tiles/img_" + str(i + 1) + ".png"
+            os.remove("./imgRef/tiles/img_" + str(i + 1) + ".png")
+
+        # remove everything in tiles and pairs arr to reset them to be used in next iteration
+        tiles.clear()
+        pairs.clear()
 
         # wait 2s to be safe
         time.sleep(3)
 
 
-# 1. reset tiles and pairs arr on each iteration of loop
-# 2. delete tile imgaes after each iteration of loop
 
 
 
