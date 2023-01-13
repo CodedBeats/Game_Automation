@@ -3,7 +3,7 @@
 | --- | --- |
 | MSM_Memory_Match | *Automatically solves each Memory Match lvl* |
 | DQ9_Grind | *WIP* |
-
+<br />
 
 #### MSM_Memory_Match
 > This will work if you have a screen size of 1920 x 1080
