@@ -1,7 +1,7 @@
 ## Content:
 | **Program** | **Description** |
 | --- | --- |
-| MSM_Memory_Match | *Automatically solves each Memory Match lvl* |
+| MSM_Memory_Match | *Automatically solves each lvl in the Memory Game of My Singing Monsters* |
 | DQ9_Grind | *WIP* |
 <br />
 
