@@ -6,5 +6,5 @@
 <br />
 
 #### MSM_Memory_Match
-> This will work if you have a screen size of 1920 x 1080
+> This will work if you have a screen size of 1920 x 1080 <br />
 > If you don't reference the `sauce.md` file for how to add your own
