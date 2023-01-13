@@ -32,8 +32,8 @@ pairs = []
 
 # ======================================================== Find Tile Coords Func ======================================================== #
 def findTiles(baseImagePath, isolatedImagePath, thresholdVal, mode, lineColor = (0, 0, 255)):
-    # set tiles arr to empty here since we want it to reset every time this func is called in automate()
-    # tiles = []
+    # display title in console for this func running
+    print("\n\n==== Finding All Unknowns ====\n")
 
     # define imgs as variables 
     baseImage = cv.imread(baseImagePath, cv.IMREAD_UNCHANGED)
@@ -106,7 +106,7 @@ def findTiles(baseImagePath, isolatedImagePath, thresholdVal, mode, lineColor = 
             # display baseImage with matched data
             # cv.imshow("Matched Image", baseImage)
             # cv.waitKey()
-            print("didn't show rects")
+            print("All Unknowns identified")
             # save the image
             # cv.imwrite('result_click_point.jpg', haystack_img)
 
@@ -140,7 +140,7 @@ def captureScreenshot(fileName, mode, x, y, w, h):
 # ======================================================== Get Tile Images Func ======================================================== #
 def getTileImages():
     # new section of data display
-    print("\n\n==== Tile Image Data ====\n")
+    print("\n\n==== Getting Tile Images ====\n")
     # wait for me to switch windows
     time.sleep(4)
 
@@ -148,16 +148,16 @@ def getTileImages():
     length = len(tiles)
     # iterate over each tile in tiles arr
     for i in range(length):
-        print(
-            "tile name: " + tiles[i].tileName,
-            "\n\tx coord: " + str(tiles[i].x), 
-            "\n\ty coord: " + str(tiles[i].y), 
-            "\n\twidth val: " + str(tiles[i].w), 
-            "\n\theight val: " + str(tiles[i].h), 
-            "\n\tcenter x coord: " + str(tiles[i].centerX), 
-            "\n\tcenter y coord: " + str(tiles[i].centerY),
-            "\n----\n"
-        )
+        # print(
+        #     "tile name: " + tiles[i].tileName,
+        #     "\n\tx coord: " + str(tiles[i].x), 
+        #     "\n\ty coord: " + str(tiles[i].y), 
+        #     "\n\twidth val: " + str(tiles[i].w), 
+        #     "\n\theight val: " + str(tiles[i].h), 
+        #     "\n\tcenter x coord: " + str(tiles[i].centerX), 
+        #     "\n\tcenter y coord: " + str(tiles[i].centerY),
+        #     "\n----\n"
+        # )
         # move cursor to tile
         pyautogui.moveTo(tiles[i].centerX, tiles[i].centerY + 20)
         # click tile to reveal image
@@ -215,12 +215,10 @@ def matchPair(imgPath1, imgPath2, thresholdVal):
 
 # ======================================================== Get All Pairs Func ======================================================== #
 def getAllPairs(mode):
-    # set pairs arr to empty here since we want it to reset every time this func is called in automate()
-    # pairs = []
-    # new section of data display
-    print("\n\n==== Tile Matches ====\n")
     
     if mode == "tiles":
+        # new section of data display
+        print("\n\n==== Getting All Tile Pairs ====\n")
         pairCount = 0
         # get length for both loops
         length = len(tiles)
@@ -256,8 +254,11 @@ def getAllPairs(mode):
                     # print("\npairs: " + str(pairCount), "\nimg: " + str(i + 1), "\nimg: " + str(j + 1), "\nmatched: " + str(doesMatch))
     
     elif mode == "boards":
+        # new section of data display
+        print("\n\n==== Getting Current Board ====\n")
+
         # set length to the amount of boards
-        length = 10
+        length = 11
         # take screenshot of whole window (the 0s are just there to fill params, they don't do anything)
         captureScreenshot("./misc/currentBoard.png", "full", 0, 0, 0, 0)
         print("Screenshot taken")
@@ -272,8 +273,6 @@ def getAllPairs(mode):
                 currentBoardPath = "./imgRef/boards/board" + str(i + 1) + ".png"
                 print("Matched with board" + str(i + 1))
                 return currentBoardPath
-            else:
-                print("Couldn't Match a Board")
 
         # delete the screenshot
         os.remove("./imgRef/misc/currentBoard.png")
@@ -287,16 +286,16 @@ def getAllPairs(mode):
 # ======================================================== Find and Locate All Pairs Func ======================================================== #
 def locatePairs():
     # new section of data display
-    print("\n\n==== Pair Positions ====\n")
+    print("\n\n==== Locating All Pairs ====\n")
     length = len(pairs)
     for i in range(length):
         time.sleep(0.2)
-        print(
-            pairs[i].pairName,
-            "\nPosition 1 - \n\t" + "x: " + str(pairs[i].t1[0]) + "\n\ty: " + str(pairs[i].t1[1]), 
-            "\nPosition 2 - \n\t" + "x: " + str(pairs[i].t2[0]) + "\n\ty: " + str(pairs[i].t2[1]),
-            "\n-------------"
-        )
+        # print(
+        #     pairs[i].pairName,
+        #     "\nPosition 1 - \n\t" + "x: " + str(pairs[i].t1[0]) + "\n\ty: " + str(pairs[i].t1[1]), 
+        #     "\nPosition 2 - \n\t" + "x: " + str(pairs[i].t2[0]) + "\n\ty: " + str(pairs[i].t2[1]),
+        #     "\n-------------"
+        # )
 
         # move to tile1 of pair and click
         pyautogui.moveTo(pairs[i].t1[0], pairs[i].t1[1])
@@ -310,6 +309,7 @@ def locatePairs():
         # pyautogui.moveTo(pairs[i].t2[0], pairs[i].t2[1] + 20)
         pyautogui.click()
         time.sleep(0.2)
+    print("All pairs located successfully")
         
 
 
@@ -324,6 +324,7 @@ def automate():
     length = 9
 
     for i in range(length):
+        print("========== New Iteration ==========")
 
         # get board path
         boardPath = getAllPairs("boards")
@@ -331,12 +332,12 @@ def automate():
         unknownNumberList = re.findall("\d+", boardPath)
         # use that number to set unknown path
         unknownPath = "./imgRef/unknowns/unknown" + str(unknownNumberList[0]) + ".png"
-        print("Board Path: " + boardPath, "\n Unknown Path: " + unknownPath)
+        print("Board Path:\t" + boardPath, "\nUnknown Path:\t" + unknownPath)
 
         # ===== Run Main Funcs ===== #
         # find all unknown tiles
         findTiles(boardPath, unknownPath, thresholdVal = 0.8, mode = "rectangles", lineColor = (0, 255, 0))
-        print(len(tiles))
+        print("Current total tiles: " + str(len(tiles)))
 
         # get all revealed tile images
         getTileImages()
@@ -349,18 +350,23 @@ def automate():
         # ========================== #
 
         # wait for level complete animation
-        time.sleep(3)
+        time.sleep(5)
+
         # delete all tile images
+        print("\n\n==== Deleting all Tile Images ====\n")
         for i in range(len(tiles)):
             "./imgRef/tiles/img_" + str(i + 1) + ".png"
             os.remove("./imgRef/tiles/img_" + str(i + 1) + ".png")
+        print("Tiles deleted successfully")
 
         # remove everything in tiles and pairs arr to reset them to be used in next iteration
+        print("\n\n==== Clearing arrays ====\n")
         tiles.clear()
         pairs.clear()
+        print("Arrays cleared successfully")
 
         # wait 2s to be safe
-        time.sleep(3)
+        time.sleep(2)
 
 
 
