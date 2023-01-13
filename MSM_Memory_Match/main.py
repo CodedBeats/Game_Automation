@@ -3,6 +3,7 @@ import numpy as np
 import pyautogui
 import time
 import os
+import re
 
 # ======================================================== Classes ======================================================== #
 # declare tile class to create instances and add to arr of tiles
@@ -326,10 +327,11 @@ def automate():
 
         # get board path
         boardPath = getAllPairs("boards")
-        # get number of board to align with unknown
-        boardPathSplit = list(boardPath)
-        unknownNumber = boardPathSplit[21]
-        unknownPath = "./imgRef/unknowns/unknown" + unknownNumber + ".png"
+        # get all numbers in boardPath
+        unknownNumberList = re.findall("\d+", boardPath)
+        # use that number to set unknown path
+        unknownPath = "./imgRef/unknowns/unknown" + str(unknownNumberList[0]) + ".png"
+        print("Board Path: " + boardPath, "\n Unknown Path: " + unknownPath)
 
         # ===== Run Main Funcs ===== #
         # find all unknown tiles
@@ -359,7 +361,6 @@ def automate():
 
 # 1. reset tiles and pairs arr on each iteration of loop
 # 2. delete tile imgaes after each iteration of loop
-# 3. fix the problem where boards and tiles >= 10 wont work when matching the current board
 
 
 
