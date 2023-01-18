@@ -51,7 +51,10 @@ def automate():
 
 
 # ======================================================== Call Funcs ======================================================== #
-#
-
 # Full Automation
 automate()
+
+
+
+# ======== Encounters ======== #
+# find a way encounter mobs
