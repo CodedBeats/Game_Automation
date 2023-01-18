@@ -94,13 +94,19 @@ def automate():
     time.sleep(3)
 
     loop = True
+    battle = True
+
     while loop:
-        # captureScreenshot("menuSample.png", "coords", 652, 822, 625, 196)
-        captureScreenshot("menuSample.png", "full", 0, 0, 0, 0)
-        isCombat = getGameStatus("menuRef", "menuSample")
-        if isCombat:
-            atkSeq()
-            time.sleep(15)
+        while battle:
+            pressKey("x")
+            time.sleep(0.5)
+            if keyboard.is_pressed("e"):
+                battle = False
+
+
+        if keyboard.is_pressed("r"):
+            battle = True
+            
 
         if keyboard.is_pressed("escape"):
             print("Exited...")
