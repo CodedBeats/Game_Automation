@@ -256,7 +256,7 @@ def getAllPairs(mode):
         print("\n\n==== Getting Current Board ====\n")
 
         # set length to the amount of boards
-        length = 11
+        length = 12
         # take screenshot of whole window (the 0s are just there to fill params, they don't do anything)
         captureScreenshot("./misc/currentBoard.png", "full", 0, 0, 0, 0)
         print("Screenshot taken")
