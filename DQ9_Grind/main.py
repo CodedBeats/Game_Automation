@@ -56,5 +56,22 @@ automate()
 
 
 
-# ======== Encounters ======== #
-# find a way encounter mobs
+# ======== OverHaul ======== #
+# ===Sequence===
+#   WHILE loop
+#       get img
+#       IF img == blackScreen
+#           wait ?s
+#       END IF
+#       gameStatus = match(img)
+#       IF gameStatus == combat        
+#           stratergy = 0 - 10
+#           IF stratergy > 3
+#               battleSequence(x, right, x, rainOfPain, x, x, down, down, x, x)
+#           ELSE
+#               battleSequence(x, right, x, hallowedArrow, x, x, down, down, x, x)
+#           END IF
+#       ELSE IF gameStatus == exploration
+#           explore()
+#       END IF
+#   END WHILE
