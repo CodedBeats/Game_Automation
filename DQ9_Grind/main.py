@@ -60,16 +60,24 @@ automate()
 # ===Sequence===
 #   WHILE loop
 #       get img
+#       ##### use random image ro match black screen against
 #       IF img == blackScreen
 #           wait ?s
 #       END IF
-#       gameStatus = match(img)
-#       IF gameStatus == combat        
+#       gameStatus = match(img, mode)
+#       IF gameStatus == combat
+#           get img
+#           combatStatus = match(img, combat)
+#           IF combatStatus == gameOver
+#               BREAK
+#           END IF
 #           stratergy = 0 - 10
 #           IF stratergy > 3
 #               battleSequence(x, right, x, rainOfPain, x, x, down, down, x, x)
+#               wait ?s
 #           ELSE
 #               battleSequence(x, right, x, hallowedArrow, x, x, down, down, x, x)
+#               wait ?s
 #           END IF
 #       ELSE IF gameStatus == exploration
 #           explore()
