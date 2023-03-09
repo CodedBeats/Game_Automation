@@ -256,7 +256,7 @@ def getAllPairs(mode):
         print("\n\n==== Getting Current Board ====\n")
 
         # set length to the amount of boards
-        length = 12
+        length = 14
         # take screenshot of whole window (the 0s are just there to fill params, they don't do anything)
         captureScreenshot("./misc/currentBoard.png", "full", 0, 0, 0, 0)
         print("Screenshot taken")
@@ -264,7 +264,7 @@ def getAllPairs(mode):
         # loop through all board images
         for i in range(length):
             # check if currentBoard is the same as board i
-            checkMatch = matchPair("./imgRef/misc/currentBoard.png", "./imgRef/boards/board" + str(i + 1) + ".png", thresholdVal = 0.9)
+            checkMatch = matchPair("./imgRef/misc/currentBoard.png", "./imgRef/boards/board" + str(i + 1) + ".png", thresholdVal = 0.95)
             # if it matches, return that board file path
             if checkMatch:
                 # set match as the board path
