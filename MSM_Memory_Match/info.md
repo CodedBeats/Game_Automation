@@ -4,6 +4,8 @@ https://github.com/CodedBeats
 # Source Code
 https://github.com/CodedBeats/Automation/tree/master/MSM_Memory_Match
 
+# Python to .exe
+`python -m auto_py_to_exe`
 
 
 
