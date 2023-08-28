@@ -56,10 +56,12 @@ def automate():
 
     # alt tab time
     time.sleep(3)
+    # print(py.position())
     while loop:
         print(iterationCount)
         breeed()
         iterationCount += 1
+
 
 
 automate()

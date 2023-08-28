@@ -135,7 +135,7 @@ def getUnknown(baseImagePath, thresholdVal):
     # display title in console for this func running
     print("\n\n==== Finding Unknown Size ====\n")
 
-    length = 4
+    length = 3
 
     # loop through all unknown images
     for i in range(length):
@@ -220,7 +220,7 @@ def getTileImages():
         #     "\n----\n"
         # )
         # move cursor to tile
-        pyautogui.moveTo(tiles[i].centerX, tiles[i].centerY)
+        pyautogui.moveTo(tiles[i].centerX, tiles[i].centerY + 20)
         # click tile to reveal image
         pyautogui.click()
         time.sleep(0.5)
@@ -331,11 +331,11 @@ def locatePairs():
         # )
 
         # move to tile1 of pair and click
-        pyautogui.moveTo(pairs[i].t1[0], pairs[i].t1[1])
+        pyautogui.moveTo(pairs[i].t1[0], pairs[i].t1[1] + 20)
         pyautogui.click()
         time.sleep(0.2)
         # move to tile2 of pair and click
-        pyautogui.moveTo(pairs[i].t2[0], pairs[i].t2[1])
+        pyautogui.moveTo(pairs[i].t2[0], pairs[i].t2[1] + 20)
         pyautogui.click()
         time.sleep(0.2)
     print("All pairs located successfully")
@@ -350,7 +350,7 @@ def automate():
     # Give me 3 sec to change to right window
     time.sleep(3)
     # set length to 9 for 9 levels 
-    length = 9
+    length = 1
 
     for i in range(length):
         print("\n\n========== New Iteration ==========")
