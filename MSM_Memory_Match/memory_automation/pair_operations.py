@@ -5,7 +5,7 @@ import pyautogui
 import time
 
 # automation functions
-from automation.tile_operations import getTilesArr
+from memory_automation.tile_operations import getTilesArr
 
 
 # declare pair class for matching pairs
@@ -61,7 +61,7 @@ def matchPair(imgPath1, imgPath2, thresholdVal):
 
 
 # sort into pairs
-def getAllPairs():
+def sortPairs():
     # get tiles arr
     tiles = getTilesArr()
 
@@ -103,7 +103,7 @@ def getAllPairs():
 
 
 
-# reveal all pairs (completing board)
+# locate and reveal all pairs (completing board)
 def locatePairs():
     # new section of data display
     print("\n\n==== Locating All Pairs ====\n")

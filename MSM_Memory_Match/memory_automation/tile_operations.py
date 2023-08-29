@@ -5,7 +5,7 @@ import pyautogui
 import time
 
 # automation functions
-from automation.screenshot_operations import captureScreenshot
+from memory_automation.screenshot_operations import captureScreenshot
 
 
 # declare tile class to create instances and add to arr of tiles
@@ -28,7 +28,7 @@ def getTilesArr():
 
 
 # find all instances of unknown tiles
-def findTiles(baseImagePath, isolatedImagePath, thresholdVal, mode, lineColor = (0, 0, 255)):
+def findTileInstances(baseImagePath, isolatedImagePath, thresholdVal, mode, lineColor = (0, 0, 255)):
     # display title in console for this func running
     print("\n\n==== Finding All Unknowns ====\n")
 
@@ -126,11 +126,12 @@ def findTiles(baseImagePath, isolatedImagePath, thresholdVal, mode, lineColor = 
 
 
 # get unknown size
-def getUnknown(baseImagePath, thresholdVal):
+def getUnknownTileSize(baseImagePath, thresholdVal):
     # display title in console for this func running
     print("\n\n==== Finding Unknown Size ====\n")
 
-    length = 8
+    # amount of unknown tile sizes
+    length = 5
 
     # loop through all unknown images
     for i in range(length):

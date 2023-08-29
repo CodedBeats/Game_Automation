@@ -3,12 +3,12 @@ import time
 import os
 
 # automation functions
-from automation.pair_operations import getAllPairs, locatePairs, getPairsArr
-from automation.screenshot_operations import captureWindow
-from automation.tile_operations import getUnknown, findTiles, getTilesArr, getTileImages
+from memory_automation.pair_operations import sortPairs, locatePairs, getPairsArr
+from memory_automation.screenshot_operations import captureWindow
+from memory_automation.tile_operations import getUnknownTileSize, findTileInstances, getTilesArr, getTileImages
 
 
-def automate():
+def automateMemoryMatch():
     print("Automation Starting")
     # Give me 3 sec to change to right window
     time.sleep(3)
@@ -25,21 +25,21 @@ def automate():
         # get current window view and set path
         windowPath = captureWindow()
         # find instance of unknown
-        unknownNumber = getUnknown(windowPath, 0.7)
+        unknownNumber = getUnknownTileSize(windowPath, 0.7)
         # set unknown path
         unknownPath = "./imgRef/unknowns/unknown" + unknownNumber + ".png"
         print("Unknown Path:\t" + unknownPath)
 
         # ===== Run Main Funcs ===== #
         # find all unknown tiles
-        findTiles(windowPath, unknownPath, thresholdVal = 0.7, mode = "rectangles", lineColor = (0, 255, 0))
+        findTileInstances(windowPath, unknownPath, thresholdVal = 0.7, mode = "rectangles", lineColor = (0, 255, 0))
         print("Current total tiles: " + str(len(tiles)))
 
         # get all revealed tile images
         getTileImages()
 
         # get all pairs
-        getAllPairs()
+        sortPairs()
 
         # find and locate all pairs
         locatePairs()
