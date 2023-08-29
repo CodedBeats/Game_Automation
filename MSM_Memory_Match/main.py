@@ -1,18 +1,10 @@
 from memory_automation.automation_operations import automateMemoryMatch
+from island_loot_automation.automate_loot import automateLoot
 
 
-# call main automation function
-automateMemoryMatch()
+# memory match solver
+# automateMemoryMatch()
 
 
-
-
-
-
-# testing
-# find all tiles
-# time.sleep(2)
-# windowPath = captureWindow()
-# findTiles(windowPath, "./imgRef/unknowns/unknown5.png", thresholdVal = 0.7, mode = "rectangles", lineColor = (0, 255, 0))
-
-
+# collect all islands loot
+# automateLoot()
