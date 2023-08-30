@@ -31,6 +31,8 @@ def scan(lootType, baseImagePath, threshold, isTesting, lineColor = (0, 0, 255))
         lootImgPath = "./imgRef/islandLoot/money.png"
     elif (lootType == "crystal"):
         lootImgPath = "./imgRef/islandLoot/crystal.png"
+    elif (lootType == "bakery"):
+        lootImgPath = "./imgRef/islandLoot/bakery.png"
     # define loot img as variable 
     lootImg = cv.imread(lootImgPath, cv.IMREAD_UNCHANGED)
 
@@ -87,10 +89,10 @@ def scan(lootType, baseImagePath, threshold, isTesting, lineColor = (0, 0, 255))
             # display islandImage with matched data
             cv.imshow("Matched Image", islandImage)
             cv.waitKey()
-            print("All Unknowns identified")
+            print("all " + lootType + " loot found")
 
     else:
-        print("Didn't find any matches")
+        print("No " + lootType + " loot found")
 
 
 # get loot arr
