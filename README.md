@@ -2,17 +2,16 @@
 | **Program** | **Description** |
 | --- | --- |
 | DQ9_Grind | *Handles the combat section of DQ9* |
-| MSM_Memory_Match | *Automatically solves each lvl in the Memory Game of My Singing Monsters* |
+| MySingingMonsters | Has 2 Programs\ *Automatically solves each lvl in the Memory Game* \ *Automatically collects all diamonds, money, crystals and food (also rebakes) from all 16 main islands* |
 | MSM_Monotony | *Automates repetitive tasks* |
-| memoryMatchClone | *Simple website to modify and test MSM_Memory_Match* |
+| memoryMatchClone | *Simple website to modify and test MSM memory match program* |
 <br />
 
 #### DQ9_Grind
 > IMG recognition in progress
 
-#### MSM_Memory_Match
-> Check `imgRef` folder for known boards, what you get may not be there <br />
-> If not, ask for video on adding boards
+#### MySingingMonsters
+> Currently upgrading the speed and comprehension of the memory match program
 
 #### MSM_Monotony
 > Zap 1 monster, then adjust the time for each monster breed time to use the automatic breed and zap functionality
