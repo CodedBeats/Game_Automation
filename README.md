@@ -2,7 +2,7 @@
 | **Program** | **Description** |
 | --- | --- |
 | DQ9_Grind | *Handles the combat section of DQ9* |
-| MySingingMonsters | Has 2 Programs\ *Automatically solves each lvl in the Memory Game* \ *Automatically collects all diamonds, money, crystals and food (also rebakes) from all 16 main islands* |
+| MySingingMonsters | Has 2 Programs<br />*Automatically solves each lvl in the Memory Game*<br />*Automatically collects all diamonds, money, crystals and food (also rebakes) from all 16 main islands* |
 | MSM_Monotony | *Automates repetitive tasks* |
 | memoryMatchClone | *Simple website to modify and test MSM memory match program* |
 <br />
