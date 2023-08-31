@@ -1,6 +1,8 @@
 # libraries
 import time
 import os
+import random
+import pygetwindow
 
 # automation functions
 from memory_automation.pair_operations import sortPairs, locatePairs, getPairsArr
@@ -10,8 +12,10 @@ from memory_automation.tile_operations import getUnknownTileSize, findTileInstan
 
 def automateMemoryMatch():
     print("Automation Starting")
-    # Give me 3 sec to change to right window
-    time.sleep(3)
+    # Give 1 sec after auto switch to window
+    msmwindow = pygetwindow.getWindowsWithTitle('My Singing Monsters')[0]
+    msmwindow.activate()
+    time.sleep(1)
     # set length to 9 for 9 levels 
     length = 9
     # get tiles and pairs arr
@@ -65,7 +69,7 @@ def automateMemoryMatch():
         print("Arrays cleared successfully")
 
         # wait 2s to be safe
-        time.sleep(2)
+        time.sleep(2 + (random.randint(0,10) / 10))
 
 
 

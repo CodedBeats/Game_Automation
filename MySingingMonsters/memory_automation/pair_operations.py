@@ -3,6 +3,7 @@ import cv2 as cv
 import numpy as np
 import pyautogui
 import time
+import random
 
 # automation functions
 from memory_automation.tile_operations import getTilesArr
@@ -91,13 +92,18 @@ def sortPairs():
                 checkMatch = matchPair("./imgRef/tiles/img_" + str(i + 1) + ".png", "./imgRef/tiles/img_" + str(j + 1) + ".png", thresholdVal = 0.8)
                 # if they match we increment pairCount and add i to the matched arr
                 if checkMatch:
-                    pairCount += 1
-                    matched.append(i)
-                    matched.append(j)
-                    print("Pair " + str(pairCount) + ": ", str(i + 1) + " and " + str(j + 1))
+                    if ((j - i) == 1) and ((j % 2) != 0):
+                        print("Pair was " + str(i + 1)  + " and " + str(j + 1) + " but has already been matched")
+                        matched.append(i)
+                        matched.append(j)
+                    else:
+                        pairCount += 1
+                        matched.append(i)
+                        matched.append(j)
+                        print("Pair " + str(pairCount) + ": ", str(i + 1) + " and " + str(j + 1))
 
-                    # added a new pair and give thir x and y coords as centerX and centerY of tiles i and j respectively
-                    pairs.append(Pair("Pair_" + str(pairCount), [tiles[i].centerX, tiles[i].centerY], [tiles[j].centerX, tiles[j].centerY]))
+                        # added a new pair and give thir x and y coords as centerX and centerY of tiles i and j respectively
+                        pairs.append(Pair("Pair_" + str(pairCount), [tiles[i].centerX, tiles[i].centerY], [tiles[j].centerX, tiles[j].centerY]))
 
                 # print("\npairs: " + str(pairCount), "\nimg: " + str(i + 1), "\nimg: " + str(j + 1), "\nmatched: " + str(doesMatch))
 
@@ -109,7 +115,7 @@ def locatePairs():
     print("\n\n==== Locating All Pairs ====\n")
     length = len(pairs)
     for i in range(length):
-        time.sleep(0.2)
+        time.sleep(0.2 + (random.randint(0,3) / 10))
         # print(
         #     pairs[i].pairName,
         #     "\nPosition 1 - \n\t" + "x: " + str(pairs[i].t1[0]) + "\n\ty: " + str(pairs[i].t1[1]), 
@@ -120,9 +126,9 @@ def locatePairs():
         # move to tile1 of pair and click
         pyautogui.moveTo(pairs[i].t1[0], pairs[i].t1[1])
         pyautogui.click()
-        time.sleep(0.2)
+        time.sleep(0.2 + (random.randint(0,3) / 10))
         # move to tile2 of pair and click
         pyautogui.moveTo(pairs[i].t2[0], pairs[i].t2[1])
         pyautogui.click()
-        time.sleep(0.2)
+        time.sleep(0.2 + (random.randint(0,3) / 10))
     print("All pairs located successfully")

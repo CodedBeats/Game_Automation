@@ -3,6 +3,8 @@ import cv2 as cv
 import numpy as np
 import pyautogui
 import time
+import os
+import random
 
 # automation functions
 from memory_automation.screenshot_operations import captureScreenshot
@@ -169,7 +171,13 @@ def getUnknownTileSize(baseImagePath, thresholdVal):
 def getTileImages():
     # new section of data display
     print("\n\n==== Getting Tile Images ====\n")
-
+    
+    # check for (and create if missing) tiles subdir
+    tilesPath = os.path.exists("./imgRef/tiles")
+    if not tilesPath:
+        os.makedirs("./imgRef/tiles")
+        print( "made missing tiles directory")
+        
     counter = 1
     length = len(tiles)
     # iterate over each tile in tiles arr
@@ -188,11 +196,11 @@ def getTileImages():
         pyautogui.moveTo(tiles[i].centerX, tiles[i].centerY)
         # click tile to reveal image
         pyautogui.click()
-        time.sleep(0.5)
+        time.sleep(0.5 + (random.randint(0,3) / 10))
         # take image at given coords
         captureScreenshot("./tiles/img_" + str(counter) + ".png", "coords", tiles[i].x, tiles[i].y, tiles[i].w, tiles[i].h)
         counter += 1
-        time.sleep(0.5)
+        time.sleep(0.5 + (random.randint(0,3) / 10))
     
     print("revealed all tile imgs")
 
