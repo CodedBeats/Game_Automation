@@ -1,6 +1,7 @@
 # libraries
 import time
 import os
+import random
 
 # automation functions
 from memory_automation.pair_operations import sortPairs, locatePairs, getPairsArr
@@ -65,7 +66,7 @@ def automateMemoryMatch():
         print("Arrays cleared successfully")
 
         # wait 2s to be safe
-        time.sleep(2)
+        time.sleep(2 + (random.randint(0,10) / 10))
 
 
 
