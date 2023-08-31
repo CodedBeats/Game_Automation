@@ -3,6 +3,7 @@ import cv2 as cv
 import numpy as np
 import pyautogui
 import time
+import os
 import random
 
 # automation functions
@@ -170,7 +171,13 @@ def getUnknownTileSize(baseImagePath, thresholdVal):
 def getTileImages():
     # new section of data display
     print("\n\n==== Getting Tile Images ====\n")
-
+    
+    # check for (and create if missing) tiles subdir
+    tilesPath = os.path.exists("./imgRef/tiles")
+    if not tilesPath:
+        os.makedirs("./imgRef/tiles")
+        print( "made missing tiles directory")
+        
     counter = 1
     length = len(tiles)
     # iterate over each tile in tiles arr
