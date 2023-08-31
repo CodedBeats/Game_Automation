@@ -92,13 +92,18 @@ def sortPairs():
                 checkMatch = matchPair("./imgRef/tiles/img_" + str(i + 1) + ".png", "./imgRef/tiles/img_" + str(j + 1) + ".png", thresholdVal = 0.8)
                 # if they match we increment pairCount and add i to the matched arr
                 if checkMatch:
-                    pairCount += 1
-                    matched.append(i)
-                    matched.append(j)
-                    print("Pair " + str(pairCount) + ": ", str(i + 1) + " and " + str(j + 1))
+                    if ((j - i) == 1) and ((j % 2) != 0):
+                        print("Pair was " + str(i + 1)  + " and " + str(j + 1) + " but has already been matched")
+                        matched.append(i)
+                        matched.append(j)
+                    else:
+                        pairCount += 1
+                        matched.append(i)
+                        matched.append(j)
+                        print("Pair " + str(pairCount) + ": ", str(i + 1) + " and " + str(j + 1))
 
-                    # added a new pair and give thir x and y coords as centerX and centerY of tiles i and j respectively
-                    pairs.append(Pair("Pair_" + str(pairCount), [tiles[i].centerX, tiles[i].centerY], [tiles[j].centerX, tiles[j].centerY]))
+                        # added a new pair and give thir x and y coords as centerX and centerY of tiles i and j respectively
+                        pairs.append(Pair("Pair_" + str(pairCount), [tiles[i].centerX, tiles[i].centerY], [tiles[j].centerX, tiles[j].centerY]))
 
                 # print("\npairs: " + str(pairCount), "\nimg: " + str(i + 1), "\nimg: " + str(j + 1), "\nmatched: " + str(doesMatch))
 
