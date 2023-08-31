@@ -3,6 +3,7 @@ import cv2 as cv
 import numpy as np
 import pyautogui
 import time
+import random
 
 # automation functions
 from memory_automation.screenshot_operations import captureScreenshot
@@ -188,11 +189,11 @@ def getTileImages():
         pyautogui.moveTo(tiles[i].centerX, tiles[i].centerY)
         # click tile to reveal image
         pyautogui.click()
-        time.sleep(0.5)
+        time.sleep(0.5 + (random.randint(0,3) / 10))
         # take image at given coords
         captureScreenshot("./tiles/img_" + str(counter) + ".png", "coords", tiles[i].x, tiles[i].y, tiles[i].w, tiles[i].h)
         counter += 1
-        time.sleep(0.5)
+        time.sleep(0.5 + (random.randint(0,3) / 10))
     
     print("revealed all tile imgs")
 
