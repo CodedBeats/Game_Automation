@@ -12,7 +12,7 @@ from memory_automation.tile_operations import getUnknownTileSize, findTileInstan
 
 def automateMemoryMatch():
     print("Automation Starting")
-    # Give 1 sec after auto switch to window
+    # switch to my singing monsters app
     msmwindow = pygetwindow.getWindowsWithTitle('My Singing Monsters')[0]
     msmwindow.activate()
     time.sleep(1)
@@ -48,10 +48,6 @@ def automateMemoryMatch():
         # find and locate all pairs
         locatePairs()
         # ========================== #
-
-        # wait for level complete animation
-        time.sleep(5)
-
         # delete all tile images
         print("\n\n==== Deleting all Tile Images ====\n")
         for i in range(len(tiles)):
@@ -68,8 +64,8 @@ def automateMemoryMatch():
         pairs.clear()
         print("Arrays cleared successfully")
 
-        # wait 2s to be safe
-        time.sleep(2 + (random.randint(0,10) / 10))
+        # wait for level complete animation
+        time.sleep(3)
 
 
 

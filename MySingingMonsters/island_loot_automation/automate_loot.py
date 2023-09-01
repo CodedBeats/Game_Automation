@@ -13,7 +13,7 @@ def automateLoot():
     time.sleep(2)
 
     # set islands to cover
-    islands = 16
+    islands = 5
 
     for i in range(islands):
         # ===== Handle Diamonds ===== #

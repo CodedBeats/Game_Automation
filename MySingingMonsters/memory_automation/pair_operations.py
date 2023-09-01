@@ -3,7 +3,6 @@ import cv2 as cv
 import numpy as np
 import pyautogui
 import time
-import random
 
 # automation functions
 from memory_automation.tile_operations import getTilesArr
@@ -115,7 +114,6 @@ def locatePairs():
     print("\n\n==== Locating All Pairs ====\n")
     length = len(pairs)
     for i in range(length):
-        time.sleep(0.2 + (random.randint(0,3) / 10))
         # print(
         #     pairs[i].pairName,
         #     "\nPosition 1 - \n\t" + "x: " + str(pairs[i].t1[0]) + "\n\ty: " + str(pairs[i].t1[1]), 
@@ -126,9 +124,9 @@ def locatePairs():
         # move to tile1 of pair and click
         pyautogui.moveTo(pairs[i].t1[0], pairs[i].t1[1])
         pyautogui.click()
-        time.sleep(0.2 + (random.randint(0,3) / 10))
+        time.sleep(0.1)
         # move to tile2 of pair and click
         pyautogui.moveTo(pairs[i].t2[0], pairs[i].t2[1])
         pyautogui.click()
-        time.sleep(0.2 + (random.randint(0,3) / 10))
+        time.sleep(0.1)
     print("All pairs located successfully")
