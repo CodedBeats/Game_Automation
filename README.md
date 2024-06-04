@@ -11,8 +11,11 @@
 #### DQ9_Grind
 > IMG recognition in progress
 
-#### MySingingMonsters
-> Currently upgrading the speed and comprehension of the memory match program
+#### MSM_Memory
+> Working properly and updated as of 5/6/2024 (AUS)
+
+#### MSM_Island_Loot
+> Single island collection works but updates broke switching islands
 
 #### MSM_Monotony
 > Zap 1 monster, then adjust the time for each monster breed time to use the automatic breed and zap functionality
