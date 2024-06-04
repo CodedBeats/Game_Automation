@@ -68,9 +68,3 @@ def automateMemoryMatch():
         time.sleep(3)
 
 
-
-
-# find all tiles
-# time.sleep(2)
-# windowPath = captureWindow()
-# findTiles(windowPath, "./imgRef/unknowns/unknown5.png", thresholdVal = 0.7, mode = "rectangles", lineColor = (0, 255, 0))

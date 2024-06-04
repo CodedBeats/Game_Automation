@@ -34,8 +34,8 @@ def findTileInstances(baseImagePath, isolatedImagePath, thresholdVal, mode, line
     print("\n\n==== Finding All Unknowns ====\n")
 
     # define imgs as variables 
-    baseImage = cv.imread(baseImagePath, cv.IMREAD_UNCHANGED)
-    isolatedImage = cv.imread(isolatedImagePath, cv.IMREAD_UNCHANGED)
+    baseImage = cv.imread(baseImagePath, cv.IMREAD_COLOR)
+    isolatedImage = cv.imread(isolatedImagePath, cv.IMREAD_COLOR)
 
     # check img properties
     # print(
@@ -132,13 +132,13 @@ def getUnknownTileSize(baseImagePath, thresholdVal):
     print("\n\n==== Finding Unknown Size ====\n")
 
     # amount of unknown tile sizes
-    length = 5
+    length = 10
 
     # loop through all unknown images
     for i in range(length):
         # define imgs as variables 
-        baseImage = cv.imread(baseImagePath, cv.IMREAD_UNCHANGED)
-        isolatedImage = cv.imread("./imgRef/unknowns/unknown" + str(i + 1) + ".png", cv.IMREAD_UNCHANGED)
+        baseImage = cv.imread(baseImagePath, cv.IMREAD_COLOR)
+        isolatedImage = cv.imread("./imgRef/unknowns/unknown" + str(i + 1) + ".png", cv.IMREAD_COLOR)
 
         # match isolatedImage against baseImage with 1 of the following methods
         # TM_CCOEFF, TM_CCOEFF_NORMED, TM_CCORR, TM_CCORR_NORMED, TM_SQDIFF, TM_SQDIFF_NORMED
@@ -175,22 +175,22 @@ def getTileImages():
     tilesPath = os.path.exists("./imgRef/tiles")
     if not tilesPath:
         os.makedirs("./imgRef/tiles")
-        print( "made missing tiles directory")
+        print("made missing tiles directory")
         
     counter = 1
     length = len(tiles)
     # iterate over each tile in tiles arr
     for i in range(length):
-        # print(
-        #     "tile name: " + tiles[i].tileName,
-        #     "\n\tx coord: " + str(tiles[i].x), 
-        #     "\n\ty coord: " + str(tiles[i].y), 
-        #     "\n\twidth val: " + str(tiles[i].w), 
-        #     "\n\theight val: " + str(tiles[i].h), 
-        #     "\n\tcenter x coord: " + str(tiles[i].centerX), 
-        #     "\n\tcenter y coord: " + str(tiles[i].centerY),
-        #     "\n----\n"
-        # )
+        print(
+            "tile name: " + tiles[i].tileName,
+            "\n\tx coord: " + str(tiles[i].x), 
+            "\n\ty coord: " + str(tiles[i].y), 
+            "\n\twidth val: " + str(tiles[i].w), 
+            "\n\theight val: " + str(tiles[i].h), 
+            "\n\tcenter x coord: " + str(tiles[i].centerX), 
+            "\n\tcenter y coord: " + str(tiles[i].centerY),
+            "\n----\n"
+        )
         # move cursor to tile
         pyautogui.moveTo(tiles[i].centerX, tiles[i].centerY)
         # click tile to reveal image

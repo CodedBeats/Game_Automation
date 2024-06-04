@@ -13,5 +13,5 @@ The_furf_of_July
 Grntrenchman
 
 
-### This program is made for a screen resolution of 1920 x 1080
-### If you have a different resolution, request the video on how to replace unknown imgs
+### This program is made for a screen resolution of 2560 x 1440
+### If you tried running the program and it didn't work, it maybe be becuase you have a different resolution, request the video on how to replace unknown imgs

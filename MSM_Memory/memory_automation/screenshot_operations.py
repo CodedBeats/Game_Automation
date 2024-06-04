@@ -6,6 +6,12 @@ import pyautogui
 
 # take screenshots at found instances
 def captureScreenshot(fileName, mode, x, y, w, h):
+    # convert to integers
+    x = int(x)
+    y = int(y)
+    w = int(w)
+    h = int(h)
+
     if mode == "full":
         # take a screenshot of the screen and store it in memory, then
         image = pyautogui.screenshot()
