@@ -409,7 +409,7 @@ def automate():
 # # find all tiles
 # time.sleep(2)
 # windowPath = captureWindow()
-# findTiles(windowPath, "./imgRef/unknowns/unknown1.png", thresholdVal = 0.7, mode = "rectangles", lineColor = (0, 255, 0))
+# findTiles(windowPath, "./imgRef/unknowns/unknown3.png", thresholdVal = 0.7, mode = "rectangles", lineColor = (0, 255, 0))
 
 # Whoop Whoop
 automate()

@@ -12,8 +12,10 @@ from island_loot_automation.next_map import nextMap
 def automateLoot():
     time.sleep(2)
 
-    # set islands to cover
-    islands = 1
+    # main islands
+    # islands = 16
+    # mirror islands
+    islands = 5
 
     for i in range(islands):
         # ===== Handle Diamonds ===== #

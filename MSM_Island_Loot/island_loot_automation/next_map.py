@@ -17,4 +17,4 @@ def nextMap():
     pyautogui.moveTo(960, 980)
     pyautogui.click()
     # wait for next island to load
-    time.sleep(5)
+    time.sleep(8.5)
