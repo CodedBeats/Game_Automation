@@ -22,7 +22,7 @@ Using openCV and pyAutoGyu to automate some of my favourite games
 1. **Clone or download this repository:**
 
    ```bash
-   git clone https://github.com/your-username/your-repo.git
+   git clone https://github.com/CodedBeats/Game_Automation
    cd MSM_Memory/
    ```
 
