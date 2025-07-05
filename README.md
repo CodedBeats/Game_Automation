@@ -1,24 +1,50 @@
+# Python Programs Automating Games
+Using openCV and pyAutoGyu to automate some of my favourite games
+
 ## Content:
 | **Program** | **Description** |
 | --- | --- |
-| DQ9_Grind | *Handles the combat section of DQ9* |
-| MSM_Memory | *Automatically solves each lvl in the Memory Game* |
-| MSM_Island_Loot | *Automatically collects all diamonds, money, crystals and food (also rebakes) from all 16 main islands* |
-| MSM_Monotony | *Automates repetitive tasks* |
-| memoryMatchClone | *Simple website to modify and test MSM memory match program* |
+| DQ9_Grind | Handles the combat section of DQ9 (played as a ROM) |
+| MSM_Memory | Automatically solves each lvl in the Memory Game of MSM |
+| memoryMatchClone | Simple website to modify and test MSM memory match program |
 <br />
 
-#### DQ9_Grind
-> IMG recognition in progress
 
-#### MSM_Memory
-> Working properly and updated as of 5/6/2024 (AUS)
+## DQ9_Grind
+> Working to differentiate starting, current and finishing combat
 
-#### MSM_Island_Loot
-> Single island collection works but updates broke switching islands
 
-#### MSM_Monotony
-> Zap 1 monster, then adjust the time for each monster breed time to use the automatic breed and zap functionality
+## MSM_Memory
+> Working and updated as of **May 6, 2024** (AUS)  
+> This program currently has the most development effort
+---
+### How to Run from Source
+1. **Clone or download this repository:**
 
-#### memoryMatchClone
-> no notes
+   ```bash
+   git clone https://github.com/your-username/your-repo.git
+   cd MSM_Memory/
+   ```
+
+   Or just download the `MSM_Memory` folder directly
+
+2. **Install Python dependencies:**
+
+   Make sure you have Python 3 installed. Then install required packages using:
+
+   ```bash
+   pip install pyautogui opencv-python numpy pygetwindow
+   ```
+
+3. **Open the game** and ensure it's running on your screen.
+
+4. **Run the script:**
+
+   ```bash
+   python main.py
+   ```
+---
+### How to Run from Executable
+
+- Download the executable from Google Drive: [Google Drive Link](https://drive.google.com/file/d/1yEB9t1Y23lmt2BZtAu5nGPbFA4OZtkVt/view?usp=sharing)
+- Follow the tutorial video: [YouTube Guide](https://www.youtube.com/watch?v=I2EMdnUvZ4g)
