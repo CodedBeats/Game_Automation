@@ -11,7 +11,7 @@ Using openCV and pyAutoGyu to automate some of my favourite games
 
 
 ## DQ9_Grind
-> Working to differentiate starting, current and finishing combat
+> Current Development - differentiating starting, current and finishing combat
 
 
 ## MSM_Memory
